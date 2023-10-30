@@ -1,0 +1,17 @@
+<script lang="ts">
+	import { OrderType } from './types';
+	export let type: OrderType;
+	export let rowData: {
+		total: string;
+		size: string;
+		price: string;
+	};
+</script>
+
+<div class="flex justify-between relative z-[1] h-[30px]">
+	<span class="text-sm" style="color: {type == OrderType.BIDS ? '#18F9D8' : '#DE345D'}"
+		>{rowData.price}</span
+	>
+	<span class="text-sm">{rowData.size}</span>
+	<span class="text-sm">{rowData.total}</span>
+</div>
