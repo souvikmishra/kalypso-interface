@@ -31,6 +31,6 @@
 		on:click={connect}
 		class="btn btn-active btn-primary h-[50px] rounded-full text-sm font-normal normal-case"
 	>
-		Connect
+		<img src="/icons/wallet.svg" alt="" />Connect
 	</button>
 {/if}
