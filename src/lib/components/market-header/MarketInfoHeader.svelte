@@ -50,7 +50,7 @@
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
-<div class="card flex h-full w-full flex-row rounded-[20px] bg-base-200">
+<div class="card flex h-[62px] w-full flex-row rounded-[20px] bg-base-200">
 	<TransparentDropdown
 		options={tokensPairList}
 		bind:selected={$generalData.selected}
