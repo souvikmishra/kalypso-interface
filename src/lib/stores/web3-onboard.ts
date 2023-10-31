@@ -6,8 +6,11 @@ import walletConnectModule from '@web3-onboard/walletconnect';
 const injected = injectedWalletsModule();
 const walletConnect = walletConnectModule({
 	projectId: import.meta.env.VITE_PROJECT_ID,
-	version: 2,
-	requiredChains: [1]
+	requiredChains: [1],
+	connectFirstChainId: true,
+	qrcodeModalOptions: {
+		mobileLinks: ['rainbow', 'metamask', 'argent', 'trust', 'imtoken', 'pillar']
+	}
 });
 
 const wallets = [injected, walletConnect];
