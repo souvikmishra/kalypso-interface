@@ -18,7 +18,7 @@
 	<!-- svelte-ignore a11y-click-events-have-key-events -->
 	<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
 	<div
-		class="btn btn-md h-full no-animation font-normal text-white bg-transparent rounded-r-none border-opacity-0 overflow-hidden capitalize"
+		class="btn no-animation btn-md h-full overflow-hidden rounded-r-none border-opacity-0 bg-transparent font-normal capitalize text-white"
 		tabindex="0"
 	>
 		{selectedOptionLabel}
@@ -26,7 +26,7 @@
 	</div>
 	<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
 	<ul
-		class={`p-2 shadow menu dropdown-content bg-base-100 rounded-box mt-1 ${dropdownClass}`}
+		class={`menu dropdown-content rounded-box mt-1 bg-base-100 p-2 shadow ${dropdownClass}`}
 		tabindex="0"
 	>
 		{#each options as option}
@@ -37,7 +37,7 @@
 				onClick={onOptionClick}
 			>
 				<option
-					class="btn btn-md btn-ghost h-full bg-transparent font-normal cursor-pointer text-white"
+					class="btn btn-ghost btn-md h-full cursor-pointer bg-transparent font-normal text-white"
 					on:click|stopPropagation={onOptionClick}
 				>
 					{option.label || option.value}

@@ -15,14 +15,14 @@
 	}
 </script>
 
-<div class="dropdown dropdown-bottom dropdown-end" class:dropdown-open={open}>
+<div class="dropdown dropdown-end dropdown-bottom" class:dropdown-open={open}>
 	<!-- svelte-ignore a11y-click-events-have-key-events -->
-	<div class="btn btn-sm h-9 mb-1 capitalize text-xs" on:click={onClick}>{selected}</div>
-	<ul class="p-2 shadow menu dropdown-content bg-base-100 rounded-box w-36">
+	<div class="btn btn-sm mb-1 h-9 text-xs capitalize" on:click={onClick}>{selected}</div>
+	<ul class="menu dropdown-content rounded-box w-36 bg-base-100 p-2 shadow">
 		{#each options as option}
 			<option
 				value={option.value}
-				class="btn btn-ghost btn-sm h-10 text-left cursor-pointer text-xs capitalize"
+				class="btn btn-ghost btn-sm h-10 cursor-pointer text-left text-xs capitalize"
 				on:click|stopPropagation={onOptionClick}
 			>
 				{option.label || option.value}

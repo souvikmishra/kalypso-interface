@@ -53,12 +53,12 @@
 	$: asksPriceLevels = buildPriceLevels(asks, OrderType.ASKS);
 </script>
 
-<div class="flex flex-col bg-base-200 rounded-[20px] p-6 h-full">
-	<p class="font-poppins text-base font-medium leading-4 text-white mb-6">Market Trades</p>
-	<div class="flex justify-between flex-row mb-3">
-		<span class="text-[#9699BC] text-sm capitalize font-normal">Price</span>
-		<span class="text-[#9699BC] text-sm capitalize font-normal">Size</span>
-		<span class="text-[#9699BC] text-sm capitalize font-normal">Total</span>
+<div class="flex h-full flex-col rounded-[20px] bg-base-200 p-6">
+	<p class="mb-6 font-poppins text-base font-medium leading-4 text-white">Market Trades</p>
+	<div class="mb-3 flex flex-row justify-between">
+		<span class="text-sm font-normal capitalize text-[#9699BC]">Price</span>
+		<span class="text-sm font-normal capitalize text-[#9699BC]">Size</span>
+		<span class="text-sm font-normal capitalize text-[#9699BC]">Total</span>
 	</div>
 	{#if bids.length && asks.length}
 		<div class="asks">

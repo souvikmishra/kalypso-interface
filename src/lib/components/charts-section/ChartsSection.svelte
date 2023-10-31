@@ -401,13 +401,12 @@
 		downloadChartAnchorEleRef.href = chartImage;
 		downloadChartAnchorEleRef.download = `ChartImage_${new Date().toLocaleString()}.png`;
 	}
-	function handleFullscreenClick() {
-	}
+	function handleFullscreenClick() {}
 </script>
 
-<div class="flex flex-col bg-base-200 rounded-[20px] p-4 pr-2">
+<div class="flex flex-col rounded-[20px] bg-base-200 p-4 pr-2">
 	<div
-		class="flex-row content-center h-9 mb-7"
+		class="mb-7 h-9 flex-row content-center"
 		class:hidden={!$showFavouritesHeader || $allHeaderTradingPairs.length <= 1}
 		class:flex={$showFavouritesHeader && $allHeaderTradingPairs.length > 1}
 	>
@@ -424,7 +423,7 @@
 		<ChartOptionsHeader bind:indicatorType bind:timeFrame>
 			<div class="dropdown dropdown-end" slot="capture-camera-slot">
 				<button
-					class="btn btn-square btn-xs h-8 w-8 p-[4px] bg-transparent border-0"
+					class="btn btn-square btn-xs h-8 w-8 border-0 bg-transparent p-[4px]"
 					on:click={handleCameraClick}
 				>
 					<img
@@ -436,18 +435,18 @@
 				<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
 				<ul
 					tabindex="0"
-					class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52"
+					class="menu dropdown-content rounded-box w-52 bg-base-100 p-2 shadow"
 					class:dropdown-open={isCameraOptionsVisible}
 				>
 					<!-- svelte-ignore a11y-click-events-have-key-events -->
 					<!-- svelte-ignore a11y-missing-attribute -->
-					<li><a bind:this={downloadChartAnchorEleRef} class="text-sm p-2">Download as png</a></li>
+					<li><a bind:this={downloadChartAnchorEleRef} class="p-2 text-sm">Download as png</a></li>
 				</ul>
 			</div>
-			<div class="flex items-center flex-1 justify-end pr-4" slot="fullscreen-chart-slot">
+			<div class="flex flex-1 items-center justify-end pr-4" slot="fullscreen-chart-slot">
 				<div class="tooltip" data-tip="View on Fullscreen">
 					<button
-						class="btn btn-square btn-xs h-8 w-8 p-[4px] bg-transparent border-0"
+						class="btn btn-square btn-xs h-8 w-8 border-0 bg-transparent p-[4px]"
 						on:click={handleFullscreenClick}
 					>
 						<img alt="View on Fullscreen" src="/icons/fullscreen.svg" />
@@ -456,7 +455,7 @@
 			</div>
 		</ChartOptionsHeader>
 	</div>
-	<div class="flex flex-1 w-full" />
+	<div class="flex w-full flex-1" />
 	<Chart {...options} ref={handleChartRef}>
 		{#if indicatorType == 'candlestick'}
 			<CandleStickSeries {...candlestickOptions} />

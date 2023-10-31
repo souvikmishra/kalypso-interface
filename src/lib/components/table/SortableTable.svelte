@@ -110,7 +110,7 @@
 </script>
 
 <div class="overflow-x-auto">
-	<table class="table w-full bg-base-200 cursor-pointer">
+	<table class="table w-full cursor-pointer bg-base-200">
 		<!-- head -->
 		<thead>
 			<slot name="header" {sortOrder} {sortBy}>
@@ -154,7 +154,7 @@
 									typeof col.class === 'string' ? col.class : '',
 									typeof col.class === 'function' ? col.class(row, n, colIndex) || '' : '',
 									classNameCell,
-									'bg-inherit border-[#202740b3]'
+									'border-[#202740b3] bg-inherit'
 								])}
 								class:{col.class}={col.class}
 							>

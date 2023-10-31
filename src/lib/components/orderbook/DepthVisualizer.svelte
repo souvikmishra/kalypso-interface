@@ -6,7 +6,7 @@
 </script>
 
 <div
-	class={`h-[30px] relative top-[30px] left-0 z-[1] ${
+	class={`relative left-0 top-[30px] z-[1] h-[30px] ${
 		type == OrderType.BIDS ? 'bg-[#18F9D81A]' : 'bg-[#DE345D33]'
 	} mt-[-30px]`}
 	style="width: {depth}%"

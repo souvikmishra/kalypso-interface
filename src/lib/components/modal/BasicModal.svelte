@@ -12,7 +12,7 @@
 <div class="modal modal-bottom sm:modal-middle" class:modal-open={open}>
 	<div class="modal-box relative">
 		{#if showCloseBtn}
-			<button class="btn btn-sm btn-circle absolute right-2 top-2" on:click={onCrossBtnClick}
+			<button class="btn btn-circle btn-sm absolute right-2 top-2" on:click={onCrossBtnClick}
 				>✕</button
 			>
 		{/if}

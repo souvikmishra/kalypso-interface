@@ -8,7 +8,7 @@
 	};
 </script>
 
-<div class="flex justify-between relative z-[1] h-[30px]">
+<div class="relative z-[1] flex h-[30px] justify-between">
 	<span class="text-sm" style="color: {type == OrderType.BIDS ? '#18F9D8' : '#DE345D'}"
 		>{rowData.price}</span
 	>

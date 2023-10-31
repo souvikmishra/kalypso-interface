@@ -10,7 +10,7 @@
 	<div class="row-span-3">
 		<TradeForm />
 	</div>
-	<div class="col-span-2 row-span-1 min-h-14">
+	<div class="min-h-14 col-span-2 row-span-1">
 		<MarketInfoHeader />
 	</div>
 	<div class="col-span-1 row-span-2 min-h-[660px]">

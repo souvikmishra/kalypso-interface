@@ -25,14 +25,14 @@
 	}
 </script>
 
-<div class={`tabs rounded-lg bg-transparent w-full justify-center p-0`}>
+<div class={`tabs w-full justify-center rounded-lg bg-transparent p-0`}>
 	{#each $allHeaderTradingPairs
 		.map((cur) => tokensPairList.find((_) => _.value == cur))
 		.filter((_) => !!_) as tab}
 		{#if tab}
 			<button
 				value={tab.value}
-				class="tab rounded-full h-full text-[#9699BC] bg-transparent relative pr-7"
+				class="tab relative h-full rounded-full bg-transparent pr-7 text-[#9699BC]"
 				class:tab-active={selMarket == tab.value}
 				style={selMarket == tab.value
 					? 'background: linear-gradient(90deg, #9753EE 0%, #417FF8 100%); color: #FFFFFF;'
@@ -42,7 +42,7 @@
 				{tab.label}
 				<!-- svelte-ignore a11y-click-events-have-key-events -->
 				<span
-					class="btn btn-xs btn-ghost p-0 h-6 w-6 rounded-full absolute top-[5px] right-1"
+					class="btn btn-ghost btn-xs absolute right-1 top-[5px] h-6 w-6 rounded-full p-0"
 					data-value={tab.value}
 					on:click|stopPropagation={onStarClick}
 				>

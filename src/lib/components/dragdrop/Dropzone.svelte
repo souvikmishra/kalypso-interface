@@ -49,18 +49,18 @@
 		on:change|preventDefault={handleChange}
 	/>
 	<button
-		class="w-full h-[85px] flex flex-row content-center items-center py-4 px-6 gap-2 bg-base-300 rounded-xl backdrop-filter cursor-pointer"
+		class="flex h-[85px] w-full cursor-pointer flex-row content-center items-center gap-2 rounded-xl bg-base-300 px-6 py-4 backdrop-filter"
 		on:click={onClick}
 	>
 		<img alt="" src="/icons/upload-file.svg" />
-		<p class="text-xs text-white text-center">
+		<p class="text-center text-xs text-white">
 			Drag'n drop your json file here, or click to select files
 		</p>
 	</button>
 	{#if isDragActive}
 		<div
 			id="drag-file-element"
-			class="absolute w-full h-full rounded-2xl top-0 left-0 right-0 bottom-0"
+			class="absolute bottom-0 left-0 right-0 top-0 h-full w-full rounded-2xl"
 			on:dragenter|preventDefault|stopPropagation={handleDrag}
 			on:dragleave|preventDefault|stopPropagation={handleDrag}
 			on:dragover|preventDefault|stopPropagation={handleDrag}

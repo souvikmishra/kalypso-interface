@@ -76,8 +76,8 @@
 	}
 </script>
 
-<div class="trade-form flex flex-col h-full px-6 py-6 bg-base-200 rounded-box">
-	<div class="flex flex-row justify-between items-center">
+<div class="trade-form rounded-box flex h-full flex-col bg-base-200 px-6 py-6">
+	<div class="flex flex-row items-center justify-between">
 		<p class="font-medium text-[#ECECEC]">Trade</p>
 		<Dropdown options={dropdownOptions} bind:selected={tradeType} />
 	</div>
@@ -90,15 +90,15 @@
 		<MovingLabelInput bind:value={inputPrice} unitText="USDC" label="Price" />
 	</div>
 	<div class="mt-4 flex flex-col">
-		<p class="font-medium text-[#ECECEC] mb-1">Public</p>
+		<p class="mb-1 font-medium text-[#ECECEC]">Public</p>
 		{#each selectedFiles as file, idx}
-			<div class="flex w-full rounded-2xl p-3 bg-base-300 mb-1">
-				<p class="text-ellipsis whitespace-nowrap overflow-hidden flex-1 text-sm pr-3">
+			<div class="mb-1 flex w-full rounded-2xl bg-base-300 p-3">
+				<p class="flex-1 overflow-hidden text-ellipsis whitespace-nowrap pr-3 text-sm">
 					{file.name}
 				</p>
 				<!-- svelte-ignore a11y-click-events-have-key-events -->
 				<button
-					class="btn btn-square btn-xs h-6 w-6 p-[4px] bg-transparent border-0"
+					class="btn btn-square btn-xs h-6 w-6 border-0 bg-transparent p-[4px]"
 					data-file-name={file.name}
 					on:click|stopPropagation={removeFile}
 				>
@@ -110,8 +110,8 @@
 		<DropzoneNew on:onFilesChange={onFilesChange} />
 	</div>
 	<div class="mt-4 flex flex-col">
-		<p class="font-medium text-[#ECECEC] mb-1">Priority</p>
+		<p class="mb-1 font-medium text-[#ECECEC]">Priority</p>
 		<CustomRadioButton options={priorityOptions} bind:selected={selectedPriority} />
 	</div>
-	<button class="btn w-full bg-primary mt-8" on:click={onSubmitBtnClick}>Submit</button>
+	<button class="btn mt-8 w-full bg-primary" on:click={onSubmitBtnClick}>Submit</button>
 </div>

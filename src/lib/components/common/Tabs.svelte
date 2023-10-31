@@ -15,11 +15,11 @@
 </script>
 
 {#if variant === 'boxed'}
-	<div class={`tabs tabs-boxed bg-base-300 rounded-lg ${tabContClass}`} style:padding="2px">
+	<div class={`tabs-boxed tabs rounded-lg bg-base-300 ${tabContClass}`} style:padding="2px">
 		{#each tabs as tab}
 			<button
 				value={tab.value}
-				class={`tab flex-1 font-semibold h-9 ${tabClass} ${
+				class={`tab h-9 flex-1 font-semibold ${tabClass} ${
 					selectedTabClass && selected == tab.value ? selectedTabClass : ''
 				}`}
 				class:tab-active={selected == tab.value}
@@ -29,7 +29,7 @@
 					<img
 						src={tab.labelSrc}
 						alt={tab.label}
-						class="h-full w-auto object-contain pointer-events-none"
+						class="pointer-events-none h-full w-auto object-contain"
 					/>
 				{:else}
 					{tab.label || tab.value}
@@ -42,7 +42,7 @@
 		{#each tabs as tab}
 			<button
 				value={tab.value}
-				class="tab tab-bordered font-semibold h-12 px-7"
+				class="tab tab-bordered h-12 px-7 font-semibold"
 				class:text-[#18F9D8]={selected == tab.value}
 				class:border-transparent={selected != tab.value}
 				class:border-[#18F9D8]={selected == tab.value}

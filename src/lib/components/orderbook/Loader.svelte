@@ -1,4 +1,4 @@
-<div class="flex w-full h-full">
+<div class="flex h-full w-full">
 	<svg
 		version="1.1"
 		id="Layer_1"

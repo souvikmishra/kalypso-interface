@@ -104,6 +104,6 @@ export const createDummyState = (payload: any) => {
 	state.maxTotalAsks = getMaxTotalSum(asks);
 	state.bids = addDepths(bids, state.maxTotalBids);
 	state.asks = addDepths(asks, state.maxTotalAsks);
-	console.log('state', state)
+	console.log('state', state);
 	return state;
 };

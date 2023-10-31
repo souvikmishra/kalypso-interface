@@ -13,7 +13,7 @@
 <div class="flex gap-4">
 	{#each options as option}
 		<label
-			class="cursor-pointer h-11 flex-1 flex items-center bg-[#181C2E] border border-[#1E2438] rounded-xl px-4 py-3"
+			class="flex h-11 flex-1 cursor-pointer items-center rounded-xl border border-[#1E2438] bg-[#181C2E] px-4 py-3"
 		>
 			<input
 				type="radio"
@@ -23,7 +23,7 @@
 				checked={option.value === selected}
 				on:click|stopPropagation={onOptionClick}
 			/>
-			<span class="text-xs font-semibold text-white ml-2">{option.label || option.value}</span>
+			<span class="ml-2 text-xs font-semibold text-white">{option.label || option.value}</span>
 		</label>
 	{/each}
 </div>

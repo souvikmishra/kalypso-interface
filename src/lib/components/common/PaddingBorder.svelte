@@ -1,1 +1,1 @@
-<div class="w-[1px] h-[calc(100%-20px)] my-[10px] bg-[#202740]" />
+<div class="my-[10px] h-[calc(100%-20px)] w-[1px] bg-[#202740]" />

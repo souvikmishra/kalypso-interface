@@ -4,8 +4,8 @@
 </script>
 
 <div class="flex flex-col">
-	<div class="font-medium text-white text-xs text-center">
+	<div class="text-center text-xs font-medium text-white">
 		{data}
 	</div>
-	<div class="font-normal text-xs m-[2px]">{label}</div>
+	<div class="m-[2px] text-xs font-normal">{label}</div>
 </div>

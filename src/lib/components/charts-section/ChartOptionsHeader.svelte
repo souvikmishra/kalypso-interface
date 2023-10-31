@@ -44,8 +44,8 @@
 	export let indicatorType = 'candlestick';
 </script>
 
-<div class="flex items-center w-full">
-	<p class="text-sm font-medium mr-8">Time</p>
+<div class="flex w-full items-center">
+	<p class="mr-8 text-sm font-medium">Time</p>
 	<Tabs
 		tabClass="!h-7 btn-xs"
 		tabContClass="!bg-[#0C101D]"
@@ -53,7 +53,7 @@
 		bind:selected={timeFrame}
 		tabs={timeFrameOptions}
 	/>
-	<p class="text-sm font-medium mr-8 ml-5">Indicator</p>
+	<p class="ml-5 mr-8 text-sm font-medium">Indicator</p>
 	<Tabs
 		tabClass="!h-7 btn-xs px-2"
 		tabContClass="!bg-[#0C101D]"

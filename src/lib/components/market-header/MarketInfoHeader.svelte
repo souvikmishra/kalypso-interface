@@ -50,7 +50,7 @@
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
-<div class="card rounded-[20px] bg-base-200 w-full h-full flex flex-row">
+<div class="card flex h-full w-full flex-row rounded-[20px] bg-base-200">
 	<TransparentDropdown
 		options={tokensPairList}
 		bind:selected={$generalData.selected}
@@ -58,13 +58,13 @@
 	>
 		<svelte:fragment slot="option" let:value let:label let:onClick>
 			<button
-				class="btn btn-md gap-2 p-1 btn-ghost h-full w-full bg-transparent font-normal cursor-pointer text-white no-animation capitalize"
+				class="btn btn-ghost no-animation btn-md h-full w-full cursor-pointer gap-2 bg-transparent p-1 font-normal capitalize text-white"
 				{value}
 				on:click|stopPropagation={onClick}
 			>
 				{label}
 				<span
-					class="btn btn-xs btn-ghost p-0 h-6 w-6 rounded-full"
+					class="btn btn-ghost btn-xs h-6 w-6 rounded-full p-0"
 					data-value={value}
 					on:click|stopPropagation={onStarClick}
 				>
@@ -80,6 +80,6 @@
 		</svelte:fragment>
 	</TransparentDropdown>
 	<!-- {selMarket} -->
-	<div class="w-[1px] h-[calc(100%-20px)] my-[10px] bg-[#202740]" />
+	<div class="my-[10px] h-[calc(100%-20px)] w-[1px] bg-[#202740]" />
 	<HeaderPriceInfo pairPriceInfo={curPairPriceInfo} />
 </div>
