@@ -38,7 +38,7 @@
 		{/each}
 	</div>
 {:else}
-	<div class="tabs bg-base-200" style:padding="2px">
+	<div class="tabs rounded-t-2xl bg-base-200" style:padding="2px">
 		{#each tabs as tab}
 			<button
 				value={tab.value}

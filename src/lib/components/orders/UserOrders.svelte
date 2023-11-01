@@ -14,7 +14,7 @@
 	let orderType = 'open-orders';
 </script>
 
-<div class="flex min-h-[220px] w-full flex-col overflow-hidden rounded-[20px]">
+<div class="flex min-h-[220px] w-full flex-col overflow-hidden">
 	<Tabs tabs={orderTypes} variant="bordered" bind:selected={orderType} />
 	{#if orderType === 'open-orders'}
 		<UserOrdersTable />
