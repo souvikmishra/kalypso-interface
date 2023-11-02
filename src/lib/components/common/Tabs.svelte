@@ -44,5 +44,6 @@
 				{tab.label || tab.value}
 			</button>
 		{/each}
+		<div class="flex-1 border-b-2 border-base-content/20"></div>
 	</div>
 {/if}

@@ -110,7 +110,7 @@
 </script>
 
 <div class="overflow-x-auto">
-	<table class="table w-full cursor-pointer bg-base-100">
+	<table class="table w-full cursor-pointer rounded-t-none bg-base-100">
 		<!-- head -->
 		<thead>
 			<slot name="header" {sortOrder} {sortBy}>
