@@ -4,10 +4,12 @@
 	import UserOrders from '$lib/components/orders/UserOrders.svelte';
 	import OrderBook from '$lib/components/orderbook/OrderBook.svelte';
 	import ChartsSection from '$lib/components/charts-section/ChartsSection.svelte';
+	import ZkMarketList from '$lib/components/zkmarket/ZkMarketList.svelte';
 </script>
 
 <div class="flex gap-6">
-	<div class="flex w-full max-w-[376px] flex-col">
+	<div class="flex w-full max-w-[376px] flex-col gap-6">
+		<ZkMarketList />
 		<TradeForm />
 	</div>
 	<div class="flex w-full flex-col gap-6">
@@ -21,6 +23,8 @@
 			</div>
 		</div>
 
-		<UserOrders />
+		<div class="h-full max-h-[489px]">
+			<UserOrders />
+		</div>
 	</div>
 </div>

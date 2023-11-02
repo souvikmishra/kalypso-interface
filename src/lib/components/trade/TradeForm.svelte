@@ -76,9 +76,9 @@
 	}
 </script>
 
-<div class="trade-form rounded-box flex flex-col bg-base-200 px-6 py-6">
+<div class="trade-form rounded-box flex h-full max-h-[656px] flex-col bg-base-200 px-6 py-6">
 	<div class="flex flex-row items-center justify-between">
-		<p class="font-medium text-[#ECECEC]">Trade</p>
+		<p class="font-medium text-[#ECECEC]">Place Order</p>
 		<Dropdown options={dropdownOptions} bind:selected={tradeType} />
 	</div>
 	<div class="mt-4" />
