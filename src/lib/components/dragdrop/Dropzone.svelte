@@ -49,11 +49,11 @@
 		on:change|preventDefault={handleChange}
 	/>
 	<button
-		class="flex h-[85px] w-full cursor-pointer flex-row content-center items-center gap-2 rounded-xl bg-base-300 px-6 py-4 backdrop-filter"
+		class="flex h-[85px] w-full cursor-pointer flex-row content-center items-center gap-2 rounded-xl border border-dashed border-base-300 bg-base-200 px-6 py-4 backdrop-filter"
 		on:click={onClick}
 	>
 		<img alt="" src="/icons/upload-file.svg" />
-		<p class="text-center text-xs text-white">
+		<p class="text-center text-xs text-base-content">
 			Drag'n drop your json file here, or click to select files
 		</p>
 	</button>

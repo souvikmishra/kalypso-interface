@@ -12,7 +12,7 @@
 </script>
 
 {#if variant === 'boxed'}
-	<div class="tabs-boxed tabs" style:padding="2px">
+	<div class="tabs-boxed tabs">
 		{#each tabs as tab}
 			<button
 				value={tab.value}
@@ -32,7 +32,7 @@
 		{/each}
 	</div>
 {:else}
-	<div class="tabs rounded-t-2xl bg-base-100" style:padding="2px">
+	<div class="tabs rounded-t-2xl bg-base-100">
 		{#each tabs as tab}
 			<button
 				value={tab.value}
