@@ -56,7 +56,16 @@
 </script>
 
 <div class="zk-market rounded-box flex h-[514px] min-h-[514px] flex-col bg-base-100 px-4 py-6">
-	<input type="text" placeholder="Search" class="input input-bordered input-md w-full" />
+	<div class="join w-full">
+		<input
+			type="text"
+			placeholder="Search"
+			class="input input-bordered input-md w-full rounded-e-none border-r-0 bg-base-200"
+		/>
+		<button class="btn join-item rounded-e-lg border-y border-l-0 border-r border-base-content/20"
+			><img src="/icons/search.svg" alt="Search" /></button
+		>
+	</div>
 	<div class="mt-6 text-lg font-semibold text-base-content">ZKDapp List</div>
 	<ul class="mt-3">
 		{#each zkAppList as zkApp, index (zkApp.id)}
