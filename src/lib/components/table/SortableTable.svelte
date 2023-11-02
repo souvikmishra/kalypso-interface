@@ -16,6 +16,7 @@
 	export let iconAsc = '▲';
 	export let iconDesc = '▼';
 	export let iconSortable = '';
+	export let tableHeightClasses = 'h-auto';
 
 	export let rowKey: string | null = null;
 
@@ -109,7 +110,7 @@
 	}
 </script>
 
-<div class="overflow-x-auto">
+<div class="overflow-x-auto overflow-y-auto rounded-b-xl {tableHeightClasses}">
 	<table class="table w-full cursor-pointer rounded-t-none bg-base-100">
 		<!-- head -->
 		<thead>
@@ -139,11 +140,11 @@
 					<tr
 						on:click={(e) => handleClickRow(e, row)}
 						on:keypress={(e) => e.key === 'Enter' && handleClickRow(e, row)}
-						class={asStringArray([
+						class="hover {asStringArray([
 							typeof classNameRow === 'string' ? classNameRow : null,
 							typeof classNameRow === 'function' ? classNameRow(row, n) : null,
 							row.$selected && classNameRowSelected
-						])}
+						])}"
 						tabIndex={selectOnClick ? 0 : null}
 					>
 						{#each columns as col, colIndex}
