@@ -76,9 +76,9 @@
 	}
 </script>
 
-<div class="trade-form rounded-box flex h-full max-h-[656px] flex-col bg-base-200 px-6 py-6">
+<div class="trade-form rounded-box flex h-full max-h-[656px] flex-col bg-base-100 px-6 py-6">
 	<div class="flex flex-row items-center justify-between">
-		<p class="font-medium text-[#ECECEC]">Place Order</p>
+		<p class="font-medium text-base-content">Place Order</p>
 		<Dropdown options={dropdownOptions} bind:selected={tradeType} />
 	</div>
 	<div class="mt-4" />
@@ -90,7 +90,7 @@
 		<MovingLabelInput bind:value={inputPrice} unitText="USDC" label="Price" />
 	</div>
 	<div class="mt-4 flex flex-col">
-		<p class="mb-1 font-medium text-[#ECECEC]">Public</p>
+		<p class="mb-1 font-medium text-base-300">Public</p>
 		{#each selectedFiles as file, idx}
 			<div class="mb-1 flex w-full rounded-2xl bg-base-300 p-3">
 				<p class="flex-1 overflow-hidden text-ellipsis whitespace-nowrap pr-3 text-sm">
@@ -110,8 +110,8 @@
 		<DropzoneNew on:onFilesChange={onFilesChange} />
 	</div>
 	<div class="mt-4 flex flex-col">
-		<p class="mb-1 font-medium text-[#ECECEC]">Priority</p>
+		<p class="mb-1 font-medium text-base-300">Priority</p>
 		<CustomRadioButton options={priorityOptions} bind:selected={selectedPriority} />
 	</div>
-	<button class="btn mt-8 w-full bg-primary" on:click={onSubmitBtnClick}>Submit</button>
+	<button class="btn btn-primary mt-8 w-full" on:click={onSubmitBtnClick}>Submit</button>
 </div>

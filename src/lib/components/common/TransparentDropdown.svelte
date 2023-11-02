@@ -18,7 +18,7 @@
 	<!-- svelte-ignore a11y-click-events-have-key-events -->
 	<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
 	<div
-		class="btn no-animation btn-md h-full overflow-hidden rounded-r-none border-opacity-0 bg-transparent font-normal capitalize text-white"
+		class="btn no-animation btn-md h-full overflow-hidden rounded-r-none border-opacity-0 bg-transparent font-normal capitalize text-base-content"
 		tabindex="0"
 	>
 		{selectedOptionLabel}
@@ -37,7 +37,7 @@
 				onClick={onOptionClick}
 			>
 				<option
-					class="btn btn-ghost btn-md h-full cursor-pointer bg-transparent font-normal text-white"
+					class="btn btn-ghost btn-md h-full cursor-pointer bg-transparent font-normal text-base-content"
 					on:click|stopPropagation={onOptionClick}
 				>
 					{option.label || option.value}

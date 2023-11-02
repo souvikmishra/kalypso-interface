@@ -7,7 +7,7 @@
 </script>
 
 <div class="ml-5 flex flex-row items-center gap-6">
-	<div class="text-2xl font-semibold text-white">
+	<div class="text-2xl font-semibold text-base-content">
 		{pairPriceInfo.price}
 	</div>
 	<HeaderPriceCell data={`$ ${pairPriceInfo['priceByTimeUSD']}`} label={'Price/Time'} />

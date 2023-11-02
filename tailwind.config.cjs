@@ -13,12 +13,15 @@ module.exports = {
 	daisyui: {
 		themes: [
 			{
-				dark: {
-					...require('daisyui/src/theming/themes')['[data-theme=dark]'],
-					'base-100': '#0C101D',
-					'base-200': '#151925',
-					'base-300': '#202740',
-					'--rounded-box': '20px'
+				light: {
+					...require('daisyui/src/theming/themes')['[data-theme=light]'],
+					primary: '#424CEA',
+					'primary-content': '#FFFFFF',
+					'base-content': '#070A21',
+					'base-200': '#F3F7FA',
+					'base-300': '#98A2B0',
+					success: '#4CC18B',
+					error: '#FF2B61'
 				}
 			}
 		]

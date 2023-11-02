@@ -46,21 +46,9 @@
 
 <div class="flex w-full items-center">
 	<p class="mr-8 text-sm font-medium">Time</p>
-	<Tabs
-		tabClass="!h-7 btn-xs"
-		tabContClass="!bg-[#0C101D]"
-		selectedTabClass="!bg-base-300 text-[#ECECEC]"
-		bind:selected={timeFrame}
-		tabs={timeFrameOptions}
-	/>
+	<Tabs bind:selected={timeFrame} tabs={timeFrameOptions} />
 	<p class="ml-5 mr-8 text-sm font-medium">Indicator</p>
-	<Tabs
-		tabClass="!h-7 btn-xs px-2"
-		tabContClass="!bg-[#0C101D]"
-		selectedTabClass="!bg-base-300 text-[#ECECEC]"
-		bind:selected={indicatorType}
-		tabs={indicatorTypeOptions}
-	/>
+	<Tabs bind:selected={indicatorType} tabs={indicatorTypeOptions} />
 	<p class="ml-5" />
 	<slot name="capture-camera-slot" />
 	<slot name="fullscreen-chart-slot" />

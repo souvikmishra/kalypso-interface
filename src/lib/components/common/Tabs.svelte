@@ -4,9 +4,6 @@
 		value: string;
 		labelSrc?: string;
 	}[] = [];
-	export let tabContClass: string = '';
-	export let tabClass: string = '';
-	export let selectedTabClass: string = '';
 	export let selected: string;
 	export let variant: 'boxed' | 'bordered' = 'boxed';
 	function onButtonClick(event: any) {
@@ -15,14 +12,11 @@
 </script>
 
 {#if variant === 'boxed'}
-	<div class={`tabs-boxed tabs rounded-lg bg-base-300 ${tabContClass}`} style:padding="2px">
+	<div class="tabs-boxed tabs" style:padding="2px">
 		{#each tabs as tab}
 			<button
 				value={tab.value}
-				class={`tab h-9 flex-1 font-semibold ${tabClass} ${
-					selectedTabClass && selected == tab.value ? selectedTabClass : ''
-				}`}
-				class:tab-active={selected == tab.value}
+				class="tab h-9 flex-1 font-semibold {selected === tab.value ? 'tab-active' : ''}"
 				on:click|stopPropagation={onButtonClick}
 			>
 				{#if tab.labelSrc}
@@ -38,14 +32,13 @@
 		{/each}
 	</div>
 {:else}
-	<div class="tabs rounded-t-2xl bg-base-200" style:padding="2px">
+	<div class="tabs rounded-t-2xl bg-base-100" style:padding="2px">
 		{#each tabs as tab}
 			<button
 				value={tab.value}
-				class="tab tab-bordered h-12 px-7 font-semibold"
-				class:text-[#18F9D8]={selected == tab.value}
-				class:border-transparent={selected != tab.value}
-				class:border-[#18F9D8]={selected == tab.value}
+				class="tab tab-bordered h-12 px-7 font-semibold {selected === tab.value
+					? 'tab-active'
+					: ''}"
 				on:click|stopPropagation={onButtonClick}
 			>
 				{tab.label || tab.value}

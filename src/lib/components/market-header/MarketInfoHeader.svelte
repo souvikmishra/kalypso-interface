@@ -50,7 +50,7 @@
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
-<div class="card flex h-[62px] w-full flex-row rounded-[20px] bg-base-200">
+<div class="card flex h-[62px] w-full flex-row rounded-[20px] bg-base-100">
 	<TransparentDropdown
 		options={tokensPairList}
 		bind:selected={$generalData.selected}
@@ -58,7 +58,7 @@
 	>
 		<svelte:fragment slot="option" let:value let:label let:onClick>
 			<button
-				class="btn btn-ghost no-animation btn-md h-full w-full cursor-pointer gap-2 bg-transparent p-1 font-normal capitalize text-white"
+				class="btn btn-ghost no-animation btn-md h-full w-full cursor-pointer gap-2 bg-transparent p-1 font-normal capitalize text-base-content"
 				{value}
 				on:click|stopPropagation={onClick}
 			>

@@ -55,9 +55,9 @@
 	}
 </script>
 
-<div class="zk-market rounded-box flex h-[514px] min-h-[514px] flex-col bg-base-200 px-4 py-6">
+<div class="zk-market rounded-box flex h-[514px] min-h-[514px] flex-col bg-base-100 px-4 py-6">
 	<input type="text" placeholder="Search" class="input input-bordered input-md w-full" />
-	<div class="mt-6 text-lg font-semibold">ZKDapp List</div>
+	<div class="mt-6 text-lg font-semibold text-base-content">ZKDapp List</div>
 	<ul class="mt-3">
 		{#each zkAppList as zkApp, index (zkApp.id)}
 			<li class=" border-b border-[##E3EBEE]">
@@ -74,25 +74,27 @@
 							>
 						</div>
 						<div class="ml-2 flex flex-col items-start justify-center">
-							<span class="text-sm font-normal"
+							<span class="text-sm font-normal text-base-content"
 								>{zkApp.name ? zkApp.name : getFormattedId(zkApp.id)}</span
 							>
-							<span class="text-xs font-normal">{zkApp.currency}</span>
+							<span class="text-xs font-normal text-base-300">{zkApp.currency}</span>
 						</div>
 					</div>
 					<div
 						class="flex flex-col items-end
 					"
 					>
-						<span class="text-sm font-medium">{zkApp.totalEvaluation.toLocaleString('en-US')}</span>
+						<span class="base-content text-sm font-medium"
+							>{zkApp.totalEvaluation.toLocaleString('en-US')}</span
+						>
 						{#if zkApp.oneDayChange < 0}
-							<span class="flex gap-1 text-xs font-normal text-[#FF2B61]">
+							<span class="flex gap-1 text-xs font-normal text-error">
 								<img src="/icons/chevron_red.svg" alt="downtrend indicator" />{Math.abs(
 									zkApp.oneDayChange
 								)}%</span
 							>
 						{:else}
-							<span class="flex gap-1 text-xs font-normal text-[#4CC18B]"
+							<span class="flex gap-1 text-xs font-normal text-success"
 								><img src="/icons/chevron_green.svg" alt="uptrend indicator" />{Math.abs(
 									zkApp.oneDayChange
 								)}%</span

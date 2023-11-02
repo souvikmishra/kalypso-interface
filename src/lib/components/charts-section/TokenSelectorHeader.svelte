@@ -41,6 +41,7 @@
 			>
 				{tab.label}
 				<!-- svelte-ignore a11y-click-events-have-key-events -->
+				<!-- svelte-ignore a11y-no-static-element-interactions -->
 				<span
 					class="btn btn-ghost btn-xs absolute right-1 top-[5px] h-6 w-6 rounded-full p-0"
 					data-value={tab.value}

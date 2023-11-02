@@ -404,7 +404,7 @@
 	function handleFullscreenClick() {}
 </script>
 
-<div class="flex h-full max-h-[612px] flex-col rounded-[20px] bg-base-200 p-4 pr-2">
+<div class="flex h-full max-h-[612px] flex-col rounded-[20px] bg-base-100 p-4 pr-2">
 	<div
 		class="mb-7 h-9 flex-row content-center"
 		class:hidden={!$showFavouritesHeader || $allHeaderTradingPairs.length <= 1}
