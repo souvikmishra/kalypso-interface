@@ -50,6 +50,4 @@
 	<p class="ml-5 mr-8 text-sm font-medium">Indicator</p>
 	<Tabs bind:selected={indicatorType} tabs={indicatorTypeOptions} />
 	<p class="ml-5" />
-	<slot name="capture-camera-slot" />
-	<slot name="fullscreen-chart-slot" />
 </div>

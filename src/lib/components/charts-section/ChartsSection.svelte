@@ -404,7 +404,7 @@
 	function handleFullscreenClick() {}
 </script>
 
-<div class="flex h-full max-h-[612px] flex-col rounded-[20px] bg-base-100 p-4 pr-2">
+<div class="flex h-full max-h-[612px] flex-col rounded-[20px] bg-base-100 p-4">
 	<div
 		class="mb-7 h-9 flex-row content-center"
 		class:hidden={!$showFavouritesHeader || $allHeaderTradingPairs.length <= 1}
@@ -419,9 +419,10 @@
 			on:click|stopPropagation={onCloseFavouritesHeader}
 		/> -->
 	</div>
-	<div class="flex flex-row">
-		<ChartOptionsHeader bind:indicatorType bind:timeFrame>
-			<div class="dropdown dropdown-end" slot="capture-camera-slot">
+	<div class="flex flex-row items-center">
+		<ChartOptionsHeader bind:indicatorType bind:timeFrame />
+		<div class="flex items-center justify-end">
+			<div class="dropdown dropdown-end z-10">
 				<button
 					class="btn btn-square btn-xs h-8 w-8 border-0 bg-transparent p-[4px]"
 					on:click={handleCameraClick}
@@ -443,19 +444,16 @@
 					<li><a bind:this={downloadChartAnchorEleRef} class="p-2 text-sm">Download as png</a></li>
 				</ul>
 			</div>
-			<div class="flex flex-1 items-center justify-end pr-4" slot="fullscreen-chart-slot">
-				<div class="tooltip" data-tip="View on Fullscreen">
-					<button
-						class="btn btn-square btn-xs h-8 w-8 border-0 bg-transparent p-[4px]"
-						on:click={handleFullscreenClick}
-					>
-						<img alt="View on Fullscreen" src="/icons/fullscreen.svg" />
-					</button>
-				</div>
+			<div class="tooltip" data-tip="View on Fullscreen">
+				<button
+					class="btn btn-square btn-xs h-8 w-8 border-0 bg-transparent p-[4px]"
+					on:click={handleFullscreenClick}
+				>
+					<img alt="View on Fullscreen" src="/icons/fullscreen.svg" />
+				</button>
 			</div>
-		</ChartOptionsHeader>
+		</div>
 	</div>
-	<div class="flex w-full flex-1" />
 	<Chart {...options} ref={handleChartRef}>
 		{#if indicatorType == 'candlestick'}
 			<CandleStickSeries {...candlestickOptions} />

@@ -14,11 +14,11 @@
 	}
 </script>
 
-<div class="dropdown dropdown-bottom h-full">
+<div class="dropdown dropdown-bottom z-10 h-full">
 	<!-- svelte-ignore a11y-click-events-have-key-events -->
 	<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
 	<div
-		class="btn no-animation btn-md h-full overflow-hidden rounded-r-none border-opacity-0 bg-transparent font-normal capitalize text-base-content"
+		class="btn no-animation btn-md h-full overflow-hidden rounded-l-2xl rounded-r-none border-opacity-0 bg-transparent font-normal capitalize text-base-content"
 		tabindex="0"
 	>
 		{selectedOptionLabel}
