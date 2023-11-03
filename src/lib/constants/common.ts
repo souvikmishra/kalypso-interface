@@ -15,3 +15,6 @@ export const tokensPairList = [
 		value: 'c3/ta'
 	}
 ];
+
+export const SUBGRAPH_API_ENDPOINT =
+	'https://api.goldsky.com/api/public/project_clo1ich60royf2nv400q3g7uo/subgraphs/kalypso-subgraph/1.0.0/gn';
