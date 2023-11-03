@@ -19,3 +19,5 @@ export const marketDataStore: Writable<{ loading: boolean; data: [] }> = writabl
 	loading: true,
 	data: []
 });
+
+export const selectedMarket: Writable<any> = writable('');

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { getMarketDataFromSubgraph } from '$lib/controller/subgraphController';
-	import { marketDataStore } from '$lib/stores/general-data';
+	import { marketDataStore, selectedMarket } from '$lib/stores/general-data';
 	import { capitaliseFirstLetters, getFirstTwoLetters } from '$lib/utils/stringHelpers';
 	import { onMount } from 'svelte';
 
@@ -12,6 +12,7 @@
 
 	async function getMarketDataModified() {
 		const marketDataFromSubgraph = await getMarketDataFromSubgraph();
+		// TODO: add one day change calulation
 		const marketDataModified = marketDataFromSubgraph.data.markets.map((market) => {
 			let modifiedMetadata;
 			const hexString = market.metadata.slice(2); // remove the '0x' prefix
@@ -22,7 +23,8 @@
 			modifiedMetadata = JSON.parse(str);
 			return {
 				...market,
-				metadata: modifiedMetadata
+				metadata: modifiedMetadata,
+				oneDayChange: 0
 			};
 		});
 		console.log('after decode', marketDataModified);
@@ -31,16 +33,7 @@
 			loading: false,
 			data: marketDataModified
 		});
-
-		// TODO: add one day change calulation
-		marketList = marketDataModified.map((market) => {
-			return {
-				id: market.id,
-				name: capitaliseFirstLetters(market.metadata?.zkAppName) ?? undefined,
-				totalEvaluation: parseInt(market.total_value),
-				oneDayChange: market.oneDayChange ?? 0
-			};
-		});
+		selectedMarket.set(marketDataModified[0]);
 	}
 
 	const nameBadgeColors = ['#2DB8E3', '#FCC35B', '#1EA7FF', '#E46C8A', '#5967FF'];
@@ -48,6 +41,7 @@
 	function getNameBadgeColor(index: number) {
 		return nameBadgeColors[index % nameBadgeColors.length];
 	}
+
 	function getNameBadgeBackgroundColor(index: number) {
 		// we add '19' at the end to lower color alpha. Ref. https://stackoverflow.com/questions/7015302/css-hexadecimal-rgba
 		return nameBadgeColors[index % nameBadgeColors.length].concat('19');
@@ -76,17 +70,23 @@
 	<ul class="mt-3 h-full">
 		{#if $marketDataStore.loading}
 			<div class="flex h-full w-full items-center justify-center">
-				<span class="loading loading-spinner loading-lg"></span>
+				<span class="loading loading-spinner loading-lg" />
 			</div>
 		{:else if $marketDataStore.data.length === 0 && !$marketDataStore.loading}
 			<div class="flex h-full w-full items-center justify-center">
-				<span class="text-base-content">No ZKDapp found</span>
+				<span class="text-center text-base-content">No ZKDapp found</span>
 			</div>
 		{:else if $marketDataStore.data.length > 0 && !$marketDataStore.loading}
-			{#each marketList as zkApp, index (zkApp.id)}
-				<li class="border-b border-[##E3EBEE]">
+			{#each $marketDataStore.data as market, index (market.id)}
+				<li class="relative border-b border-[##E3EBEE]">
 					<button
-						class="flex w-full items-center justify-between rounded-xl px-3 py-[10.5px] hover:bg-[#F3F7FA]"
+						on:click={() => {
+							selectedMarket.set(market);
+						}}
+						class="flex w-full items-center justify-between rounded-xl px-3 py-[10.5px] hover:bg-[#F3F7FA] {$selectedMarket.id ===
+						market.id
+							? 'content-none before:absolute before:-left-4 before:top-4 before:h-9 before:w-1 before:rounded-e-lg before:bg-primary'
+							: ''}"
 					>
 						<div class="flex">
 							<div
@@ -94,13 +94,17 @@
 								style="background-color: {getNameBadgeBackgroundColor(index)};"
 							>
 								<span style="color: {getNameBadgeColor(index)};"
-									>{zkApp.name ? getFirstTwoLetters(zkApp.name) : zkApp.id.slice(0, 2)}</span
+									>{market.metadata.zkAppName
+										? getFirstTwoLetters(market.metadata.zkAppName)
+										: market.id.slice(0, 2)}</span
 								>
 							</div>
 							<div class="ml-2 flex shrink flex-col items-start justify-center">
 								<span
 									class="max-w-[127px] overflow-hidden text-ellipsis whitespace-nowrap text-sm font-normal text-base-content 2xl:max-w-[193px]"
-									>{zkApp.name ? zkApp.name : getFormattedId(zkApp.id)}</span
+									>{market.metadata.zkAppName
+										? capitaliseFirstLetters(market.metadata.zkAppName)
+										: getFormattedId(market.id)}</span
 								>
 								<span class="text-xs font-normal text-base-300">USDC</span>
 							</div>
@@ -110,18 +114,18 @@
 				"
 						>
 							<span class="base-content text-sm font-medium"
-								>{zkApp.totalEvaluation.toLocaleString('en-US')}</span
+								>{parseInt(market.total_value).toLocaleString('en-US')}</span
 							>
-							{#if zkApp.oneDayChange < 0}
+							{#if market.oneDayChange < 0}
 								<span class="flex gap-1 text-xs font-normal text-error">
 									<img src="/icons/chevron_red.svg" alt="downtrend indicator" />{Math.abs(
-										zkApp.oneDayChange
+										market.oneDayChange
 									)}%</span
 								>
 							{:else}
 								<span class="flex gap-1 text-xs font-normal text-success"
 									><img src="/icons/chevron_green.svg" alt="uptrend indicator" />{Math.abs(
-										zkApp.oneDayChange
+										market.oneDayChange
 									)}%</span
 								>
 							{/if}
@@ -129,7 +133,11 @@
 					</button>
 				</li>
 			{:else}
-				fuck
+				<div class="flex h-full w-full items-center justify-center">
+					<span class="text-base-content text-center"
+						>Uh Oh. Seems like our servers are gone fishing! Please retry.</span
+					>
+				</div>
 			{/each}
 		{/if}
 	</ul>
