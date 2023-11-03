@@ -7,18 +7,18 @@
 	import ZkMarketList from '$lib/components/zkmarket/ZkMarketList.svelte';
 </script>
 
-<div class="flex gap-6">
-	<div class="flex w-full max-w-[376px] flex-col gap-6">
+<div class="flex gap-5 2xl:gap-6">
+	<div class="flex w-full min-w-[285px] max-w-[376px] flex-col gap-5 2xl:gap-6">
 		<ZkMarketList />
 		<TradeForm />
 	</div>
-	<div class="flex w-full flex-col gap-6">
-		<div class="flex gap-6">
-			<div class="flex w-full max-w-[982px] flex-col gap-2">
+	<div class="flex w-full flex-col gap-5 2xl:gap-6">
+		<div class="flex gap-5 2xl:gap-6">
+			<div class="flex w-full min-w-[750px] max-w-[982px] flex-col gap-2">
 				<MarketInfoHeader />
 				<ChartsSection />
 			</div>
-			<div class="row-span-2 w-full max-w-[466px]">
+			<div class="row-span-2 w-full min-w-[348px] max-w-[466px]">
 				<OrderBook />
 			</div>
 		</div>
