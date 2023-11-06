@@ -100,14 +100,14 @@
 		},
 		{
 			key: 'actualReward',
-			title: 'Actual Reward',
+			title: 'ACTUAL REWARD',
 			value: (v) => v.value,
 			sortable: true,
 			headerClass: 'text-center'
 		},
 		{
 			key: 'provingTime',
-			title: 'Proving Time',
+			title: 'PROVING TIME',
 			value: (v) => v.value,
 			sortable: true,
 			headerClass: 'text-center'
