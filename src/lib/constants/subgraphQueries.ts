@@ -1,5 +1,5 @@
-export const MARKET_DATA_QUERY = `query MarketDataQuery {
-  markets (first: 10) {
+export const MARKET_DATA_QUERY = `query MarketDataQuery ($timeStamp: BigInt) {
+  markets {
     id
     market_id
     verifier
@@ -10,6 +10,13 @@ export const MARKET_DATA_QUERY = `query MarketDataQuery {
     total_proofs
     avg_cost
     avg_time
+  }
+  askRequests(orderBy: created_at_ts, orderDirection: desc, where: {created_at_ts_gt: $timeStamp}) {
+    id
+    created_at_ts
+    market {
+      market_id
+    }
   }
 }`;
 

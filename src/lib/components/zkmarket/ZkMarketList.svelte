@@ -11,8 +11,21 @@
 	let marketList = [];
 
 	async function getMarketDataModified() {
-		const marketDataFromSubgraph = await getMarketDataFromSubgraph();
-		// TODO: add one day change calulation
+		const currentUnixTimeStamp = Math.floor(Date.now() / 1000);
+		const timeStampOneDayBeforeCurrent = currentUnixTimeStamp - 86400;
+
+		const marketDataFromSubgraph = await getMarketDataFromSubgraph(timeStampOneDayBeforeCurrent);
+
+		const askRequestsOfLastDay = marketDataFromSubgraph.data.askRequests;
+		const askRequestsPerMarketInLastOneDay = askRequestsOfLastDay.reduce((acc, curr) => {
+			if (acc[curr.market.market_id]) {
+				acc[curr.market.market_id] += 1;
+			} else {
+				acc[curr.market.market_id] = 1;
+			}
+			return acc;
+		}, {});
+
 		const marketDataModified = marketDataFromSubgraph.data.markets.map((market) => {
 			let modifiedMetadata;
 			const hexString = market.metadata.slice(2); // remove the '0x' prefix
@@ -21,10 +34,17 @@
 				.map((byte) => String.fromCharCode(parseInt(byte, 16)))
 				.join('');
 			modifiedMetadata = JSON.parse(str);
+			const oneDayChange = market.total_proofs
+				? (
+						((askRequestsPerMarketInLastOneDay[market.id] || 0) / market.total_proofs) *
+						100
+				  ).toFixed(2)
+				: 0;
+
 			return {
 				...market,
-				metadata: modifiedMetadata,
-				oneDayChange: 0
+				oneDayChange,
+				metadata: modifiedMetadata
 			};
 		});
 		console.log('after decode', marketDataModified);
@@ -114,9 +134,7 @@
 				"
 						>
 							<span class="base-content text-sm font-medium"
-								>{parseInt(market.total_value).toLocaleString('en-US', {
-									minimumFractionDigits: 2
-								})}</span
+								>{parseInt(market.total_asks).toLocaleString('en-US')}</span
 							>
 							{#if market.oneDayChange < 0}
 								<span class="flex gap-1 text-xs font-normal text-error">

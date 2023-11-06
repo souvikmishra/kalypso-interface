@@ -24,10 +24,10 @@ async function subgraphQueryWrapper(url: string, query: string, variables: Recor
 	}
 }
 
-export async function getMarketDataFromSubgraph() {
+export async function getMarketDataFromSubgraph(timeStamp: number) {
 	const url = SUBGRAPH_API_ENDPOINT;
 	const query = MARKET_DATA_QUERY;
-	const response = await subgraphQueryWrapper(url, query, {});
+	const response = await subgraphQueryWrapper(url, query, { timeStamp });
 	return response;
 }
 
