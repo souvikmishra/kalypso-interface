@@ -7,7 +7,9 @@
 </script>
 
 <div class="ml-5 flex flex-row items-center gap-6">
-	<div class="text-2xl font-semibold text-base-content">TODO</div>
+	<div class="text-2xl font-semibold text-base-content">
+		{parseInt($selectedMarket.total_value).toLocaleString('en-US')}
+	</div>
 	<HeaderPriceCell data={`$ ${priceByTime.toFixed(2)}`} label={'Price/Time'} />
 	<PaddingBorder />
 	<HeaderPriceCell data={`$ ${$selectedMarket.avg_cost}`} label={'Avg. Cost'} />
