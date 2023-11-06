@@ -1,4 +1,4 @@
-import { MARKET_DATA_QUERY } from '$lib/constants/subgraphQueries';
+import { ALL_ASKS_FOR_MARKET_QUERY, MARKET_DATA_QUERY } from '$lib/constants/subgraphQueries';
 import { SUBGRAPH_API_ENDPOINT } from '$lib/constants/common';
 
 async function subgraphQueryWrapper(url: string, query: string, variables: Record<string, any>) {
@@ -24,5 +24,12 @@ export async function getMarketDataFromSubgraph() {
 	const url = SUBGRAPH_API_ENDPOINT;
 	const query = MARKET_DATA_QUERY;
 	const response = await subgraphQueryWrapper(url, query, {});
+	return response;
+}
+
+export async function getAllAsksForMarketFromSubgraph(marketId: string) {
+	const url = SUBGRAPH_API_ENDPOINT;
+	const query = ALL_ASKS_FOR_MARKET_QUERY;
+	const response = await subgraphQueryWrapper(url, query, { marketId });
 	return response;
 }
