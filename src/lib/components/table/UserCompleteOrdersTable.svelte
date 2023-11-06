@@ -129,8 +129,24 @@
 		{#each tableRows as tableRow (tableRow.txId)}
 			<tr>
 				<td class="border-[#202740b3] bg-inherit">{tableRow.completedTimeStamp}</td>
-				<td class="border-[#202740b3] bg-inherit">{tableRow.orderStatus}</td>
-				<td class="border-[#202740b3] bg-inherit">{tableRow.orderType}</td>
+				<td class="border-[#202740b3] bg-inherit"
+					><div
+						class="badge text-white {tableRow.orderStatus === 'COMPLETE'
+							? 'badge-success'
+							: 'badge-error'}"
+					>
+						{tableRow.orderStatus}
+					</div></td
+				>
+				<td class="border-[#202740b3] bg-inherit">
+					<div
+						class="badge text-white {tableRow.orderType === 'BUY'
+							? 'badge-success'
+							: 'badge-error'}"
+					>
+						{tableRow.orderType}
+					</div>
+				</td>
 				<td class="border-[#202740b3] bg-inherit">{tableRow.orderSize}</td>
 				<td class="border-[#202740b3] bg-inherit">{tableRow.askAmount}</td>
 				<td class="border-[#202740b3] bg-inherit">{tableRow.proofGenerationCost}</td>

@@ -119,7 +119,11 @@
 			<tr>
 				<td class="border-[#202740b3] bg-inherit">{tableRow.assignTimeStamp}</td>
 				<td class="border-[#202740b3] bg-inherit">{tableRow.orderStatus}</td>
-				<td class="border-[#202740b3] bg-inherit">{tableRow.orderType}</td>
+				<td class="border-[#202740b3] bg-inherit">
+					<div class="badge badge-success">
+						{tableRow.orderType}
+					</div>
+				</td>
 				<td class="border-[#202740b3] bg-inherit">{tableRow.orderSize}</td>
 				<td class="border-[#202740b3] bg-inherit">{tableRow.askAmount}</td>
 				<td class="border-[#202740b3] bg-inherit">{tableRow.proofGenerationCost}</td>
