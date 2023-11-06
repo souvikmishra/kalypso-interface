@@ -9,9 +9,11 @@
 </script>
 
 <div class="relative z-[1] flex h-[30px] justify-between">
-	<span class="text-sm" style="color: {type == OrderType.BIDS ? '#18F9D8' : '#DE345D'}"
+	<span class="text-sm {type == OrderType.BIDS ? 'text-[#4CC18B]' : 'text-[#FF2B61]'}"
 		>{rowData.price}</span
 	>
-	<span class="text-sm">{rowData.size}</span>
+	<span class="text-sm {type == OrderType.BIDS ? 'text-[#4CC18B]' : 'text-[#FF2B61]'}"
+		>{rowData.size}</span
+	>
 	<span class="text-sm">{rowData.total}</span>
 </div>
