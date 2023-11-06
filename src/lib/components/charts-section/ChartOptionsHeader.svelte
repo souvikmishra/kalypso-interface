@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Tabs from '../common/Tabs.svelte';
+	import LineIndicatorTabs from './LineIndicatorTabs.svelte';
 	const timeFrameOptions = [
 		{
 			key: '15m',
@@ -23,31 +24,12 @@
 		}
 	];
 	export let timeFrame = '1d';
-
-	const indicatorTypeOptions = [
-		{
-			label: 'Candlestick',
-			value: 'candlestick',
-			labelSrc: '/icons/candlestick.svg'
-		},
-		{
-			label: 'Hollowstick',
-			value: 'hollowstick',
-			labelSrc: '/icons/hollowcandlestick.svg'
-		},
-		{
-			label: 'Line',
-			value: 'line',
-			labelSrc: '/icons/linechart.svg'
-		}
-	];
 	export let indicatorType = 'candlestick';
 </script>
 
 <div class="flex w-full items-center">
-	<p class="mr-8 text-sm font-medium">Time</p>
+	<p class="mr-4 text-sm font-medium">Time</p>
 	<Tabs bind:selected={timeFrame} tabs={timeFrameOptions} />
-	<p class="ml-5 mr-8 text-sm font-medium">Indicator</p>
-	<Tabs bind:selected={indicatorType} tabs={indicatorTypeOptions} />
-	<p class="ml-5" />
+	<p class="ml-6 mr-4 text-sm font-medium">Indicator</p>
+	<LineIndicatorTabs bind:selected={indicatorType} />
 </div>

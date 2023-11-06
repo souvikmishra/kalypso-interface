@@ -121,7 +121,7 @@
 							</div>
 							<div class="ml-2 flex shrink flex-col items-start justify-center">
 								<span
-									class="max-w-[85px] overflow-hidden text-ellipsis whitespace-nowrap text-sm font-normal text-base-content 2xl:max-w-[181px]"
+									class="max-w-[120px] overflow-hidden text-ellipsis whitespace-nowrap text-sm font-normal text-base-content 2xl:max-w-[181px]"
 									>{market.metadata.zkAppName
 										? capitaliseFirstLetters(market.metadata.zkAppName)
 										: getFormattedId(market.id)}</span
