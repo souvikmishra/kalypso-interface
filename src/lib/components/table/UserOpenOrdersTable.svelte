@@ -21,6 +21,10 @@
 				minimumFractionDigits: 2
 			});
 			const orderSize = ask.prover_data.length + ask.secret_data.length;
+			const proofGenerationCost =
+				parseInt(ask.task?.generator_info?.proof_generation_cost).toLocaleString('en-US', {
+					minimumFractionDigits: 2
+				}) ?? 'N/A';
 			return {
 				txId: ask.id,
 				orderStatus,
@@ -30,7 +34,7 @@
 				completedTimeStamp,
 				askAmount,
 				askProvingTime,
-				orderAmount: 'todo'
+				proofGenerationCost
 			};
 		});
 
@@ -118,7 +122,7 @@
 				<td class="border-[#202740b3] bg-inherit">{tableRow.orderType}</td>
 				<td class="border-[#202740b3] bg-inherit">{tableRow.orderSize}</td>
 				<td class="border-[#202740b3] bg-inherit">{tableRow.askAmount}</td>
-				<td class="border-[#202740b3] bg-inherit">{tableRow.actualReward}</td>
+				<td class="border-[#202740b3] bg-inherit">{tableRow.proofGenerationCost}</td>
 				<td class="border-[#202740b3] bg-inherit">{tableRow.askProvingTime}</td>
 			</tr>
 		{/each}

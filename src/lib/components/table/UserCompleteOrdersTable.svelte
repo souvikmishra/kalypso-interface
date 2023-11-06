@@ -25,6 +25,10 @@
 				minimumFractionDigits: 2
 			});
 			const orderSize = ask.prover_data.length + ask.secret_data.length;
+			const proofGenerationCost =
+				parseInt(ask.task?.generator_info?.proof_generation_cost).toLocaleString('en-US', {
+					minimumFractionDigits: 2
+				}) ?? 'N/A';
 			return {
 				txId: ask.id,
 				askAmount,
@@ -33,7 +37,7 @@
 				orderSize,
 				completedTimeStamp,
 				provingTime,
-				orderAmount: 'todo'
+				proofGenerationCost
 			};
 		});
 
@@ -64,9 +68,9 @@
 
 	const tableColumns: ITableColumns<any> = [
 		{
-			key: 'tstamp',
+			key: 'completedTimeStamp',
 			title: 'PROOF GENERATED ON',
-			value: (v) => new Date(v.tstamp).toLocaleString(),
+			value: (v) => new Date(v.completedTimeStamp).toLocaleString(),
 			sortable: true,
 			headerClass: 'text-left'
 		},
@@ -78,9 +82,9 @@
 			headerClass: 'text-center'
 		},
 		{
-			key: 'market',
-			title: 'MARKET',
-			value: (v) => v.market,
+			key: 'orderType',
+			title: 'TYPE',
+			value: (v) => v.orderType,
 			sortable: true,
 			headerClass: 'text-center'
 		},
@@ -94,17 +98,18 @@
 		{
 			key: 'askAmount',
 			title: 'ASK AMOUNT',
-			value: (v) => v.orderAmount,
+			value: (v) => v.askAmount,
 			sortable: true,
 			headerClass: 'text-center'
 		},
 		{
-			key: 'actualReward',
+			key: 'proofGenerationCost',
 			title: 'ACTUAL REWARD',
 			value: (v) => v.value,
 			sortable: true,
 			headerClass: 'text-center'
 		},
+
 		{
 			key: 'provingTime',
 			title: 'PROVING TIME',
@@ -128,7 +133,7 @@
 				<td class="border-[#202740b3] bg-inherit">{tableRow.orderType}</td>
 				<td class="border-[#202740b3] bg-inherit">{tableRow.orderSize}</td>
 				<td class="border-[#202740b3] bg-inherit">{tableRow.askAmount}</td>
-				<td class="border-[#202740b3] bg-inherit">{tableRow.actualReward}</td>
+				<td class="border-[#202740b3] bg-inherit">{tableRow.proofGenerationCost}</td>
 				<td class="border-[#202740b3] bg-inherit">{tableRow.provingTime}</td>
 			</tr>
 		{/each}
