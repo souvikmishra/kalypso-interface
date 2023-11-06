@@ -21,11 +21,11 @@
 			proofsExecuted: 40697
 		},
 		'c3/ta': {
-			avgCostUSD: 1330,
-			avgTimeInMinutes: 120,
-			price: 24025,
-			priceByTimeUSD: 1500,
-			proofsExecuted: 40697
+			avgCostUSD: 1730,
+			avgTimeInMinutes: 160,
+			price: 11025,
+			priceByTimeUSD: 1400,
+			proofsExecuted: 40117
 		}
 	};
 	generalData.subscribe((value) => {

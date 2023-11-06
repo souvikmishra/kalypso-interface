@@ -28,17 +28,17 @@
 		layout: {
 			background: {
 				type: ColorType.Solid,
-				color: '#151925'
+				color: '#fff'
 			},
-			textColor: '#ffffff',
+			textColor: '#070A21',
 			fontFamily: 'Poppins'
 		},
 		grid: {
 			vertLines: {
-				color: 'rgba(42, 46, 57, 0.3)'
+				color: '#fff'
 			},
 			horzLines: {
-				color: 'rgba(42, 46, 57, 0.6)'
+				color: '#E3EBEE'
 			}
 		}
 	};
@@ -361,22 +361,22 @@
 			case 'candlestick':
 				candlestickOptions = {
 					data,
-					upColor: '#18F9D8',
-					wickUpColor: '#18F9D8',
+					upColor: '#57CA94',
+					wickUpColor: '#57CA94',
 					borderVisible: false,
-					downColor: '#DE345D',
-					wickDownColor: '#DE345D'
+					downColor: '#FF3569',
+					wickDownColor: '#FF3569'
 				};
 				break;
 			case 'hollowstick':
 				hollowstickOptions = {
 					data,
 					upColor: 'transparent',
-					wickUpColor: '#18F9D8',
-					borderUpColor: '#18F9D8',
-					downColor: '#DE345D',
-					borderDownColor: '#DE345D',
-					wickDownColor: '#DE345D'
+					wickUpColor: '#57CA94',
+					borderUpColor: '#57CA94',
+					downColor: '#FF3569',
+					borderDownColor: '#FF3569',
+					wickDownColor: '#FF3569'
 				};
 				break;
 		}
