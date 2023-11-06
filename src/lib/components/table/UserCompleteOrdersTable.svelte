@@ -1,35 +1,38 @@
 <script lang="ts">
 	import SortableTable from './SortableTable.svelte';
 	import type { ITableColumns } from './types';
-	import { getNotCompletedAsksForMarketFromSubgraph } from '$lib/controller/subgraphController';
+	import {
+		getCompletedAsksForMarketFromSubgraph,
+		getNotCompletedAsksForMarketFromSubgraph
+	} from '$lib/controller/subgraphController';
 	import { selectedMarket } from '$lib/stores/general-data';
 
 	let tableRows: any[] = [];
 	let tableDataLoading = true;
 
-	async function getNotCompletedAsksForMarketModified(marketId: string) {
+	async function getCompletedAsksForMarketModified(marketId: string) {
 		tableDataLoading = true;
-		const asksForMarketFromSubgraph = await getNotCompletedAsksForMarketFromSubgraph(marketId);
-		console.log(asksForMarketFromSubgraph, 'asksForMarketFromSubgraph which are open');
+		const asksForMarketFromSubgraph = await getCompletedAsksForMarketFromSubgraph(marketId);
+		console.log(asksForMarketFromSubgraph, 'asksForMarketFromSubgraph which are completed');
 		const modifiedAsksForMarket = asksForMarketFromSubgraph.data.askRequests.map((ask) => {
 			const orderStatus = ask.state === 'COMPLETE' ? 'COMPLETE' : 'OPEN';
 			const orderType = ask.state === 'COMPLETE' ? 'BUY' : 'SELL';
-			const assignTimeStamp = new Date(ask.task.assigned_at_ts * 1000).toLocaleString();
 			const completedTimeStamp = new Date(ask.task.completed_at_ts * 1000).toLocaleString();
-			const askProvingTime = getHumanReadableTime(ask.proving_time);
+			const provingTime = getHumanReadableTime(
+				parseInt(ask.task.completed_at_ts) - parseInt(ask.task.assigned_at_ts)
+			);
 			const askAmount = (BigInt(ask.reward) / 1000000n).toLocaleString('en-US', {
 				minimumFractionDigits: 2
 			});
 			const orderSize = ask.prover_data.length + ask.secret_data.length;
 			return {
 				txId: ask.id,
+				askAmount,
 				orderStatus,
 				orderType,
 				orderSize,
-				assignTimeStamp,
 				completedTimeStamp,
-				askAmount,
-				askProvingTime,
+				provingTime,
 				orderAmount: 'todo'
 			};
 		});
@@ -44,18 +47,25 @@
 		const hours = Math.floor((secondsToConvert % 86400) / 3600);
 		const minutes = Math.floor((secondsToConvert % 3600) / 60);
 		const seconds = Math.floor((secondsToConvert % 3600) % 60);
-		return `${days}d ${hours}h ${minutes}m ${seconds}s`;
+
+		let timeString = '';
+		if (days > 0) timeString += `${days}d `;
+		if (hours > 0) timeString += `${hours}h `;
+		if (minutes > 0) timeString += `${minutes}m `;
+		if (seconds > 0) timeString += `${seconds}s`;
+
+		return timeString.trim();
 	}
 
 	$: if ($selectedMarket.id !== '' && $selectedMarket.id !== undefined) {
 		console.log($selectedMarket.id);
-		getNotCompletedAsksForMarketModified($selectedMarket.id);
+		getCompletedAsksForMarketModified($selectedMarket.id);
 	}
 
 	const tableColumns: ITableColumns<any> = [
 		{
 			key: 'tstamp',
-			title: 'ORDER CREATED ON',
+			title: 'PROOF GENERATED ON',
 			value: (v) => new Date(v.tstamp).toLocaleString(),
 			sortable: true,
 			headerClass: 'text-left'
@@ -97,7 +107,7 @@
 		},
 		{
 			key: 'provingTime',
-			title: 'Requested Proving Time',
+			title: 'Proving Time',
 			value: (v) => v.value,
 			sortable: true,
 			headerClass: 'text-center'
@@ -113,18 +123,18 @@
 	{#if tableRows.length > 0}
 		{#each tableRows as tableRow (tableRow.txId)}
 			<tr>
-				<td class="border-[#202740b3] bg-inherit">{tableRow.assignTimeStamp}</td>
+				<td class="border-[#202740b3] bg-inherit">{tableRow.completedTimeStamp}</td>
 				<td class="border-[#202740b3] bg-inherit">{tableRow.orderStatus}</td>
 				<td class="border-[#202740b3] bg-inherit">{tableRow.orderType}</td>
 				<td class="border-[#202740b3] bg-inherit">{tableRow.orderSize}</td>
 				<td class="border-[#202740b3] bg-inherit">{tableRow.askAmount}</td>
 				<td class="border-[#202740b3] bg-inherit">{tableRow.actualReward}</td>
-				<td class="border-[#202740b3] bg-inherit">{tableRow.askProvingTime}</td>
+				<td class="border-[#202740b3] bg-inherit">{tableRow.provingTime}</td>
 			</tr>
 		{/each}
 	{:else}
 		<tr>
-			<td class="border-[#202740b3] bg-inherit text-center" colspan="7">No Open Orders</td>
+			<td class="border-[#202740b3] bg-inherit text-center" colspan="7">No Completed Orders</td>
 		</tr>
 	{/if}
 </SortableTable>

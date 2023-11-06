@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Tabs from '../common/Tabs.svelte';
-	import UserOrdersTable from '../table/UserOpenOrdersTable.svelte';
+	import UserOpenOrdersTable from '../table/UserOpenOrdersTable.svelte';
+	import UserCompleteOrdersTable from '../table/UserCompleteOrdersTable.svelte';
 	const orderTypes = [
 		{
 			label: 'Open Orders',
@@ -17,8 +18,8 @@
 <div class="flex min-h-[220px] w-full flex-col overflow-hidden">
 	<Tabs tabs={orderTypes} variant="bordered" bind:selected={orderType} />
 	{#if orderType === 'open-orders'}
-		<UserOrdersTable />
+		<UserOpenOrdersTable />
 	{:else}
-		<UserOrdersTable />
+		<UserCompleteOrdersTable />
 	{/if}
 </div>
