@@ -8,11 +8,18 @@
 
 <div class="ml-5 flex flex-row items-center gap-6">
 	<div class="text-2xl font-semibold text-base-content">
-		{parseInt($selectedMarket.total_value).toLocaleString('en-US')}
+		{parseInt($selectedMarket.total_value).toLocaleString('en-US', {
+			minimumFractionDigits: 2
+		})}
 	</div>
 	<HeaderPriceCell data={`$ ${priceByTime.toFixed(2)}`} label={'Price/Time'} />
 	<PaddingBorder />
-	<HeaderPriceCell data={`$ ${$selectedMarket.avg_cost}`} label={'Avg. Cost'} />
+	<HeaderPriceCell
+		data={`$ ${parseInt($selectedMarket.avg_cost).toLocaleString('en-US', {
+			minimumFractionDigits: 2
+		})}`}
+		label={'Avg. Cost'}
+	/>
 	<PaddingBorder />
 	<HeaderPriceCell
 		data={`${($selectedMarket.avg_time / 60).toFixed(2)} hours`}

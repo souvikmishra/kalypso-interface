@@ -101,7 +101,7 @@
 							</div>
 							<div class="ml-2 flex shrink flex-col items-start justify-center">
 								<span
-									class="max-w-[127px] overflow-hidden text-ellipsis whitespace-nowrap text-sm font-normal text-base-content 2xl:max-w-[193px]"
+									class="max-w-[85px] overflow-hidden text-ellipsis whitespace-nowrap text-sm font-normal text-base-content 2xl:max-w-[181px]"
 									>{market.metadata.zkAppName
 										? capitaliseFirstLetters(market.metadata.zkAppName)
 										: getFormattedId(market.id)}</span
@@ -114,7 +114,9 @@
 				"
 						>
 							<span class="base-content text-sm font-medium"
-								>{parseInt(market.total_value).toLocaleString('en-US')}</span
+								>{parseInt(market.total_value).toLocaleString('en-US', {
+									minimumFractionDigits: 2
+								})}</span
 							>
 							{#if market.oneDayChange < 0}
 								<span class="flex gap-1 text-xs font-normal text-error">
