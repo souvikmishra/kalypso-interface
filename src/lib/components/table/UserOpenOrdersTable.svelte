@@ -31,28 +31,28 @@
 			title: 'SIZE',
 			value: (v) => v.orderSize,
 			sortable: true,
-			headerClass: 'text-center'
+			headerClass: 'text-right'
 		},
 		{
 			key: 'askAmount',
 			title: 'ASK AMOUNT',
 			value: (v) => v.orderAmount,
 			sortable: true,
-			headerClass: 'text-center'
+			headerClass: 'text-right'
 		},
 		{
 			key: 'actualReward',
 			title: 'ACTUAL REWARD',
 			value: (v) => v.value,
 			sortable: true,
-			headerClass: 'text-center'
+			headerClass: 'text-right'
 		},
 		{
 			key: 'provingTime',
 			title: 'REQUESTED PROVING TIME',
 			value: (v) => v.value,
 			sortable: true,
-			headerClass: 'text-center'
+			headerClass: 'text-right'
 		}
 	];
 </script>
@@ -65,9 +65,9 @@
 	{#if tableRows.length > 0}
 		{#each tableRows as tableRow (tableRow.txId)}
 			<tr>
-				<td class="border-[#202740b3] bg-inherit">{tableRow.assignTimeStamp}</td>
-				<td class="border-[#202740b3] bg-inherit">{tableRow.orderStatus}</td>
-				<td class="border-[#202740b3] bg-inherit">
+				<td class="border-[#202740b3] bg-inherit text-left">{tableRow.assignTimeStamp}</td>
+				<td class="border-[#202740b3] bg-inherit text-center">{tableRow.orderStatus}</td>
+				<td class="border-[#202740b3] bg-inherit text-center">
 					<div
 						class="badge text-white {tableRow.orderType === 'BUY'
 							? 'badge-success'
@@ -76,10 +76,10 @@
 						{tableRow.orderType}
 					</div>
 				</td>
-				<td class="border-[#202740b3] bg-inherit">{tableRow.orderSize}</td>
-				<td class="border-[#202740b3] bg-inherit">{tableRow.askAmount}</td>
-				<td class="border-[#202740b3] bg-inherit">{tableRow.proofGenerationCost}</td>
-				<td class="border-[#202740b3] bg-inherit">{tableRow.askProvingTime}</td>
+				<td class="border-[#202740b3] bg-inherit text-right">{tableRow.orderSize}</td>
+				<td class="border-[#202740b3] bg-inherit text-right">{tableRow.askAmount}</td>
+				<td class="border-[#202740b3] bg-inherit text-right">{tableRow.proofGenerationCost}</td>
+				<td class="border-[#202740b3] bg-inherit text-right">{tableRow.askProvingTime}</td>
 			</tr>
 		{/each}
 	{:else}
