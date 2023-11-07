@@ -12,7 +12,21 @@
 		tableDataLoading = true;
 		const orderBookDataFromSubgraph = await getOrderBookDataFromSubgraph(marketId);
 
-		orderBookData = orderBookDataFromSubgraph.data.askRequests.map((ask) => {
+		let nextMatchedPrice = 0;
+		orderBookData = orderBookDataFromSubgraph.data.askRequests.map((ask, idx) => {
+			nextMatchedPrice =
+				idx < orderBookDataFromSubgraph.data.askRequests.length - 1
+					? parseInt(
+							orderBookDataFromSubgraph.data.askRequests[idx + 1].task.generator_info
+								.proof_generation_cost
+					  ) / 100000000
+					: 0;
+			const priceColor =
+				idx === orderBookDataFromSubgraph.data.askRequests.length - 1
+					? 'text-[#4CC18B]'
+					: parseInt(ask.task.generator_info.proof_generation_cost) / 100000000 <= nextMatchedPrice
+					? 'text-[#4CC18B]'
+					: 'text-[#FF2B61]';
 			const txId = ask.id;
 			const date = new Date(ask.task.completed_at_ts * 1000).toLocaleTimeString('en-US', {
 				hour12: false
@@ -28,7 +42,9 @@
 				ask.task.generator_info.generator.id.slice(0, 3) +
 				'...' +
 				ask.task.generator_info.generator.id.slice(-4);
+
 			return {
+				priceColor,
 				txId,
 				date,
 				matchedPrice,

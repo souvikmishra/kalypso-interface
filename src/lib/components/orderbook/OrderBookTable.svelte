@@ -47,15 +47,13 @@
 		{#each tableRows as tableRow (tableRow.txId)}
 			<tr>
 				<td class="border-[#202740b3] bg-inherit"
-					><div class={tableRow.matchedPrice === 'COMPLETE' ? '' : ''}>
+					><div class={tableRow.priceColor}>
 						{tableRow.matchedPrice}
 					</div></td
 				>
 				<td class="border-[#202740b3] bg-inherit text-right">{tableRow.date}</td>
-				<td class="border-[#202740b3] bg-inherit">
-					<div class="text-right {tableRow.proofTime === 'BUY' ? '' : ''}">
-						{tableRow.proofTime}
-					</div>
+				<td class="border-[#202740b3] bg-inherit text-right">
+					{tableRow.proofTime}
 				</td>
 				<td class="border-[#202740b3] bg-inherit text-right">{tableRow.generator}</td>
 			</tr>
