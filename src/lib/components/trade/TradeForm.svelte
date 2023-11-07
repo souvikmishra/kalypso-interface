@@ -76,42 +76,46 @@
 	}
 </script>
 
-<div class="trade-form rounded-box flex h-full max-h-[656px] flex-col bg-base-100 px-6 py-6">
-	<div class="flex flex-row items-center justify-center">
-		<p class="text-center text-2xl font-medium text-base-content">Place Order</p>
-		<!-- <Dropdown options={dropdownOptions} bind:selected={tradeType} /> -->
-	</div>
-	<div class="mt-5" />
-	<Tabs tabs={orderTypeTabs} bind:selected={orderType} />
-	<div class="mt-[18px]">
-		<MovingLabelInput bind:value={inputTime} unitText="Secs" label="Time" />
-	</div>
-	<div class="mt-[18px]">
-		<MovingLabelInput bind:value={inputPrice} unitText="USDC" label="Price" />
-	</div>
-	<div class="mt-[18px] flex flex-col">
-		<p class="mb-1 text-sm text-base-300">Public</p>
-		{#each selectedFiles as file, idx}
-			<div class="mb-1 flex w-full rounded-2xl bg-base-300 p-3">
-				<p class="flex-1 overflow-hidden text-ellipsis whitespace-nowrap pr-3 text-sm">
-					{file.name}
-				</p>
-				<!-- svelte-ignore a11y-click-events-have-key-events -->
-				<button
-					class="btn btn-square btn-xs h-6 w-6 border-0 bg-transparent p-[4px]"
-					data-file-name={file.name}
-					on:click|stopPropagation={removeFile}
-				>
-					<img alt="rmeove file close icon" class="pointer-events-none" src="/icons/close.svg" />
-					<!-- <span class="cursor-pointer" data-file-name={file.name} on:click|stopPropagation={removeFile}>x</span> -->
-				</button>
-			</div>
-		{/each}
-		<DropzoneNew on:onFilesChange={onFilesChange} />
-	</div>
-	<div class="mt-[18px] flex items-center justify-between">
-		<p class="text-sm text-base-300">Priority</p>
-		<CustomRadioButton options={priorityOptions} bind:selected={selectedPriority} />
+<div
+	class="trade-form rounded-box flex h-full max-h-[656px] flex-col justify-between bg-base-100 px-6 py-6"
+>
+	<div class="flex flex-col justify-center">
+		<div class="flex flex-row items-center justify-center">
+			<p class="text-center text-2xl font-medium text-base-content">Place Order</p>
+			<!-- <Dropdown options={dropdownOptions} bind:selected={tradeType} /> -->
+		</div>
+		<div class="mt-5" />
+		<!-- <Tabs tabs={orderTypeTabs} bind:selected={orderType} /> -->
+		<div class="mt-[18px]">
+			<MovingLabelInput bind:value={inputTime} unitText="Secs" label="Time" />
+		</div>
+		<div class="mt-[18px]">
+			<MovingLabelInput bind:value={inputPrice} unitText="USDC" label="Price" />
+		</div>
+		<div class="mt-[18px] flex flex-col">
+			<p class="mb-1 text-sm text-base-300">Public</p>
+			{#each selectedFiles as file, idx}
+				<div class="mb-1 flex w-full rounded-2xl bg-base-300 p-3">
+					<p class="flex-1 overflow-hidden text-ellipsis whitespace-nowrap pr-3 text-sm">
+						{file.name}
+					</p>
+					<!-- svelte-ignore a11y-click-events-have-key-events -->
+					<button
+						class="btn btn-square btn-xs h-6 w-6 border-0 bg-transparent p-[4px]"
+						data-file-name={file.name}
+						on:click|stopPropagation={removeFile}
+					>
+						<img alt="rmeove file close icon" class="pointer-events-none" src="/icons/close.svg" />
+						<!-- <span class="cursor-pointer" data-file-name={file.name} on:click|stopPropagation={removeFile}>x</span> -->
+					</button>
+				</div>
+			{/each}
+			<DropzoneNew on:onFilesChange={onFilesChange} />
+		</div>
+		<div class="mt-[18px] flex items-center justify-between">
+			<p class="text-sm text-base-300">Priority</p>
+			<CustomRadioButton options={priorityOptions} bind:selected={selectedPriority} />
+		</div>
 	</div>
 	<button class="btn btn-primary mt-8 w-full" on:click={onSubmitBtnClick}>Submit</button>
 </div>
