@@ -17,14 +17,19 @@
 			const assignTimeStamp = new Date(ask.task.assigned_at_ts * 1000).toLocaleString();
 			const completedTimeStamp = new Date(ask.task.completed_at_ts * 1000).toLocaleString();
 			const askProvingTime = getHumanReadableTime(ask.proving_time);
-			const askAmount = (BigInt(ask.reward) / 1000000n).toLocaleString('en-US', {
-				minimumFractionDigits: 2
+			const askAmount = (BigInt(ask.reward) / 100000000n).toLocaleString('en-US', {
+				minimumFractionDigits: 2,
+				maximumFractionDigits: 8
 			});
-			const orderSize = ask.prover_data.length + ask.secret_data.length;
+			const orderSize = ask.prover_data.length + ask.secret_data.length + ' bytes';
 			const proofGenerationCost =
-				parseInt(ask.task?.generator_info?.proof_generation_cost).toLocaleString('en-US', {
-					minimumFractionDigits: 2
-				}) ?? 'N/A';
+				(parseInt(ask.task?.generator_info?.proof_generation_cost) / 10000000).toLocaleString(
+					'en-US',
+					{
+						minimumFractionDigits: 2,
+						maximumFractionDigits: 8
+					}
+				) ?? 'N/A';
 			return {
 				txId: ask.id,
 				orderStatus,
