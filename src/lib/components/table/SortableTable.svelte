@@ -17,6 +17,7 @@
 	export let iconDesc = '▼';
 	export let iconSortable = '';
 	export let tableHeightClasses = 'h-auto';
+	export let tableVariant: 'table-md' | 'table-sm' | 'table-lg' | 'table-xs' = 'table-md';
 
 	// export let rowKey: string | null = null;
 	export let loading: boolean;
@@ -112,13 +113,20 @@
 </script>
 
 <div class="overflow-x-auto overflow-y-auto rounded-b-xl {tableHeightClasses}">
-	<table class="table w-full cursor-pointer rounded-t-none bg-base-100">
+	<table
+		class="table table-pin-rows w-full cursor-pointer rounded-t-none bg-base-100 {tableVariant}"
+	>
 		<!-- head -->
 		<thead>
 			<slot name="header" {sortOrder} {sortBy}>
 				<tr>
 					{#each columns as col}
-						<th class:cursor-pointer={col.sortable} class:rounded-none={!col.rounded} tabindex="0">
+						<th
+							class:cursor-pointer={col.sortable}
+							class:rounded-none={!col.rounded}
+							tabindex="0"
+							class={col.headerClass}
+						>
 							{col.title}
 							{#if sortBy === col.key}
 								{@html sortOrder === 1 ? iconAsc : iconDesc}
