@@ -1,4 +1,5 @@
 import {
+	ALL_ASKS_OF_MARKET_FOR_USER_QUERY,
 	COMPLETED_ASKS_FOR_MARKET_QUERY,
 	MARKET_DATA_QUERY,
 	NOT_COMPLETED_ASKS_FOR_MARKET_QUERY
@@ -42,5 +43,12 @@ export async function getCompletedAsksForMarketFromSubgraph(marketId: string) {
 	const url = SUBGRAPH_API_ENDPOINT;
 	const query = COMPLETED_ASKS_FOR_MARKET_QUERY;
 	const response = await subgraphQueryWrapper(url, query, { marketId });
+	return response;
+}
+
+export async function getAsksOfMarketForUserFromSubgraph(userAddress: string, marketId: string) {
+	const url = SUBGRAPH_API_ENDPOINT;
+	const query = ALL_ASKS_OF_MARKET_FOR_USER_QUERY;
+	const response = await subgraphQueryWrapper(url, query, { userAddress, marketId });
 	return response;
 }

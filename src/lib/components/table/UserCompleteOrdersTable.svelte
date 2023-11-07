@@ -1,75 +1,9 @@
 <script lang="ts">
 	import SortableTable from './SortableTable.svelte';
 	import type { ITableColumns } from './types';
-	import {
-		getCompletedAsksForMarketFromSubgraph,
-		getNotCompletedAsksForMarketFromSubgraph
-	} from '$lib/controller/subgraphController';
-	import { selectedMarket } from '$lib/stores/general-data';
 
-	let tableRows: any[] = [];
-	let tableDataLoading = true;
-
-	async function getCompletedAsksForMarketModified(marketId: string) {
-		tableDataLoading = true;
-		const asksForMarketFromSubgraph = await getCompletedAsksForMarketFromSubgraph(marketId);
-		console.log(asksForMarketFromSubgraph, 'asksForMarketFromSubgraph which are completed');
-		const modifiedAsksForMarket = asksForMarketFromSubgraph.data.askRequests.map((ask) => {
-			const orderStatus = ask.state === 'COMPLETE' ? 'COMPLETE' : 'OPEN';
-			const orderType = ask.state === 'COMPLETE' ? 'BUY' : 'SELL';
-			const completedTimeStamp = new Date(ask.task.completed_at_ts * 1000).toLocaleString();
-			const provingTime = getHumanReadableTime(
-				parseInt(ask.task.completed_at_ts) - parseInt(ask.task.assigned_at_ts)
-			);
-			const askAmount = (BigInt(ask.reward) / 100000000n).toLocaleString('en-US', {
-				minimumFractionDigits: 2,
-				maximumFractionDigits: 8
-			});
-			const orderSize = ask.prover_data.length + ask.secret_data.length + ' bytes';
-			const proofGenerationCost =
-				(parseInt(ask.task?.generator_info?.proof_generation_cost) / 100000000).toLocaleString(
-					'en-US',
-					{
-						minimumFractionDigits: 2,
-						maximumFractionDigits: 8
-					}
-				) ?? 'N/A';
-			return {
-				txId: ask.id,
-				askAmount,
-				orderStatus,
-				orderType,
-				orderSize,
-				completedTimeStamp,
-				provingTime,
-				proofGenerationCost
-			};
-		});
-
-		tableRows = modifiedAsksForMarket;
-		tableDataLoading = false;
-	}
-
-	// function to get a human readable string format of time when given seconds as input
-	function getHumanReadableTime(secondsToConvert: number) {
-		const days = Math.floor(secondsToConvert / 86400);
-		const hours = Math.floor((secondsToConvert % 86400) / 3600);
-		const minutes = Math.floor((secondsToConvert % 3600) / 60);
-		const seconds = Math.floor((secondsToConvert % 3600) % 60);
-
-		let timeString = '';
-		if (days > 0) timeString += `${days}d `;
-		if (hours > 0) timeString += `${hours}h `;
-		if (minutes > 0) timeString += `${minutes}m `;
-		if (seconds > 0) timeString += `${seconds}s`;
-
-		return timeString.trim();
-	}
-
-	$: if ($selectedMarket.id !== '' && $selectedMarket.id !== undefined) {
-		console.log($selectedMarket.id);
-		getCompletedAsksForMarketModified($selectedMarket.id);
-	}
+	export let tableRows: any[] = [];
+	export let tableDataLoading = true;
 
 	const tableColumns: ITableColumns<any> = [
 		{

@@ -67,3 +67,28 @@ export const COMPLETED_ASKS_FOR_MARKET_QUERY = `query CompletedMarketAsksQuery($
     }
   }
 }`;
+
+export const ALL_ASKS_OF_MARKET_FOR_USER_QUERY = `query AllAsksForUserQuery($userAddress: String, $marketId: String)  {
+  askRequests (where: {prover: $userAddress, market: $marketId}) {
+    prover
+    id
+    state
+    prover_data
+    secret_data
+    expiry
+    market {
+      id
+      market_id
+    }
+    proving_time
+    reward
+    task {
+      generator
+      assigned_at_ts
+      completed_at_ts
+      generator_info {
+        proof_generation_cost
+      }
+    }
+  }
+}`;
