@@ -2,8 +2,29 @@
 	import { selectedMarket } from '$lib/stores/general-data';
 	import PaddingBorder from '../common/PaddingBorder.svelte';
 	import HeaderPriceCell from './HeaderPriceCell.svelte';
+	import {
+		getPendingOrAssignedAsksForMarketFromSubgraph
+	} from '$lib/controller/subgraphController';
+
+	let pendingAsks: any;
+	let assignedAsks: any;
+
+	async function getPendingOrAssignedAsks(marketId: string) {
+		const asksReceived = await getPendingOrAssignedAsksForMarketFromSubgraph(marketId);
+		const receivedAssigned = asksReceived.data.askRequests.filter(
+			(ask) => ask.state === 'ASSIGNED'
+		);
+		const receivedPending = asksReceived.data.askRequests.filter(
+			(ask) => ask.state === 'CREATE'
+		);
+		assignedAsks = receivedAssigned.length;
+		pendingAsks = receivedPending.length;
+	}
 
 	$: priceByTime = $selectedMarket.avg_cost / ($selectedMarket.avg_time / 60);
+	$: if ($selectedMarket.id !== '' && $selectedMarket.id !== undefined) {
+		getPendingOrAssignedAsks($selectedMarket.id);
+	}
 </script>
 
 <div class="ml-5 flex flex-row items-center gap-6">
@@ -12,7 +33,6 @@
 			minimumFractionDigits: 2
 		})}`}
 	</div>
-	<HeaderPriceCell data={`$${priceByTime.toFixed(2)}`} label={'Price/Time'} />
 	<PaddingBorder />
 	<HeaderPriceCell
 		data={`$${parseInt($selectedMarket.avg_cost).toLocaleString('en-US', {
@@ -21,11 +41,15 @@
 		label={'Avg. Cost'}
 	/>
 	<PaddingBorder />
+	<HeaderPriceCell data={`${$selectedMarket.total_proofs}`} label={'Completed Proofs'} />
+	<PaddingBorder />
 	<HeaderPriceCell
-		data={`${($selectedMarket.avg_time / 60).toFixed(2)} hours`}
-		label={'Avg. Time'}
+		data={`${pendingAsks}`}
+		label={'Pending Orders'}
 	/>
 	<PaddingBorder />
-	<HeaderPriceCell data={`${$selectedMarket.total_proofs}`} label={'Proofs Done'} />
-	<PaddingBorder />
+	<HeaderPriceCell
+		data={`${assignedAsks}`}
+		label={'Assigned Orders'}
+	/>
 </div>
