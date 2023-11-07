@@ -9,22 +9,21 @@
 
 <svelte:head><title>Kalypso</title></svelte:head>
 
-<div class="flex gap-5 2xl:gap-6">
-	<div class="flex w-full min-w-[285px] max-w-[376px] flex-col gap-5 2xl:gap-6">
+<div class="flex gap-4 2xl:gap-6">
+	<div class="flex w-full min-w-[285px] max-w-[376px] flex-col gap-4 2xl:gap-6">
 		<ZkMarketList />
 		<TradeForm />
 	</div>
-	<div class="flex w-full max-w-[1118px] flex-col gap-5 2xl:max-w-none 2xl:gap-6">
-		<div class="flex gap-5 2xl:gap-6">
-			<div class="flex w-full min-w-[806px] max-w-[1046px] flex-col gap-2">
+	<div class="flex w-full max-w-[1118px] flex-col gap-4 2xl:max-w-none 2xl:gap-6">
+		<div class="flex gap-4 2xl:gap-6">
+			<div class="flex w-full min-w-[701px] max-w-[1046px] shrink flex-col gap-2">
 				<MarketInfoHeader />
 				<ChartsSection />
 			</div>
-			<div class="row-span-2 w-full min-w-[291px] max-w-[402px]">
+			<div class="row-span-2 w-full min-w-[397px] max-w-[402px]">
 				<OrderBook />
 			</div>
 		</div>
-
 		<div class="h-full max-h-[489px]">
 			<UserOrders />
 		</div>

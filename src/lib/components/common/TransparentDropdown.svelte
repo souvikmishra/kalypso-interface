@@ -18,11 +18,11 @@
 	<!-- svelte-ignore a11y-click-events-have-key-events -->
 	<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
 	<div
-		class="btn no-animation btn-md h-full overflow-hidden rounded-l-2xl rounded-r-none border-opacity-0 bg-transparent font-normal capitalize text-base-content"
+		class="btn no-animation btn-md h-full min-w-[140px] overflow-hidden rounded-l-2xl rounded-r-none border-opacity-0 bg-transparent font-normal capitalize text-base-content"
 		tabindex="0"
 	>
 		{selectedOptionLabel}
-		<img src="/icons/dropdown.svg" alt="dropdown-icon" class="ml-3" />
+		<img src="/icons/dropdown.svg" alt="dropdown-icon" class="ml-1" />
 	</div>
 	<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
 	<ul
