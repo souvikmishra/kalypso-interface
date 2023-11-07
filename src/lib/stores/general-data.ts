@@ -1,5 +1,12 @@
-import { derived, writable, type Writable } from 'svelte/store';
+import { derived, writable, type Readable, type Writable } from 'svelte/store';
 import { persisted } from './persisted-store';
+import onboard from './web3-onboard';
+
+const wallets$ = onboard.state.select('wallets');
+export const web3WalletStore = writable<any[]>([]);
+wallets$.subscribe((wallets) => {
+	web3WalletStore.set(wallets);
+});
 
 export const showFavouritesHeader = writable(true);
 
@@ -21,3 +28,7 @@ export const marketDataStore: Writable<{ loading: boolean; data: [] }> = writabl
 });
 
 export const selectedMarket: Writable<any> = writable('');
+
+export const connected: Readable<boolean> = derived(web3WalletStore, ($web3walletStore) => {
+	return $web3walletStore.length > 0;
+});
