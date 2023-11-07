@@ -20,7 +20,7 @@
 {#if connectedAccount}
 	<button
 		on:click={disconnect}
-		class="btn btn-primary btn-active h-[50px] rounded-full text-sm font-normal normal-case"
+		class="btn btn-primary h-[50px] rounded-full text-sm font-normal normal-case"
 	>
 		<span>
 			{trunc(connectedAccount.address)}
@@ -29,7 +29,7 @@
 {:else}
 	<button
 		on:click={connect}
-		class="btn btn-primary btn-active h-[50px] rounded-full text-sm font-normal normal-case"
+		class="btn btn-primary h-[50px] rounded-full text-sm font-normal normal-case"
 	>
 		<img src="/icons/wallet.svg" alt="" />Connect
 	</button>

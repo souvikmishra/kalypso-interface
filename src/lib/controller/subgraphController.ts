@@ -1,9 +1,9 @@
 import {
+	ALL_ASKS_OF_MARKET_FOR_USER_QUERY,
 	COMPLETED_ASKS_FOR_MARKET_QUERY,
 	MARKET_DATA_QUERY,
 	NOT_COMPLETED_ASKS_FOR_MARKET_QUERY,
-	PENDING_ASKS_FOR_MARKET_QUERY,
-	ASSIGNED_ASKS_FOR_MARKET_QUERY
+	PENDING_OR_ASSIGNED_ASKS_FOR_MARKET_QUERY
 } from '$lib/constants/subgraphQueries';
 import { SUBGRAPH_API_ENDPOINT } from '$lib/constants/common';
 
@@ -47,16 +47,16 @@ export async function getCompletedAsksForMarketFromSubgraph(marketId: string) {
 	return response;
 }
 
-export async function getPendingAsksForMarketFromSubgraph(marketId: string) {
+export async function getPendingOrAssignedAsksForMarketFromSubgraph(marketId: string) {
 	const url = SUBGRAPH_API_ENDPOINT;
-	const query = PENDING_ASKS_FOR_MARKET_QUERY;
+	const query = PENDING_OR_ASSIGNED_ASKS_FOR_MARKET_QUERY;
 	const response = await subgraphQueryWrapper(url, query, { marketId });
 	return response;
 }
 
-export async function getAssignedAsksForMarketFromSubgraph(marketId: string) {
+export async function getAsksOfMarketForUserFromSubgraph(userAddress: string, marketId: string) {
 	const url = SUBGRAPH_API_ENDPOINT;
-	const query = PENDING_ASKS_FOR_MARKET_QUERY;
-	const response = await subgraphQueryWrapper(url, query, { marketId });
+	const query = ALL_ASKS_OF_MARKET_FOR_USER_QUERY;
+	const response = await subgraphQueryWrapper(url, query, { userAddress, marketId });
 	return response;
 }
