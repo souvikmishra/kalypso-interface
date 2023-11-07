@@ -93,13 +93,14 @@ export const PENDING_OR_ASSIGNED_ASKS_FOR_MARKET_QUERY = `query CompletedMarketA
 }`;
 
 export const ALL_ASKS_OF_MARKET_FOR_USER_QUERY = `query AllAsksForUserQuery($userAddress: String, $marketId: String)  {
-  askRequests (where: {prover: $userAddress, market: $marketId}) {
+  askRequests (orderBy: created_at_ts, orderDirection: desc , where: {prover: $userAddress, market: $marketId}) {
     prover
     id
     state
     prover_data
     secret_data
     expiry
+    created_at_ts
     market {
       id
       market_id

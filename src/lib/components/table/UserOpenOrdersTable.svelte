@@ -6,9 +6,9 @@
 
 	const tableColumns: ITableColumns<any> = [
 		{
-			key: 'tstamp',
-			title: 'ORDER CREATED ON',
-			value: (v) => new Date(v.tstamp).toLocaleString(),
+			key: 'date',
+			title: 'DATE',
+			value: (v) => new Date(v.date).toLocaleString(),
 			sortable: true,
 			headerClass: 'text-left'
 		},
@@ -20,37 +20,37 @@
 			headerClass: 'text-center'
 		},
 		{
-			key: 'market',
-			title: 'MARKET',
-			value: (v) => v.market,
+			key: 'assignedTo',
+			title: 'ASSIGNED TO',
+			value: (v) => v.assignedTo,
 			sortable: true,
 			headerClass: 'text-center'
 		},
 		{
-			key: 'orderSize',
-			title: 'SIZE',
-			value: (v) => v.orderSize,
+			key: 'assignTimeStamp',
+			title: 'ASSIGNED AT',
+			value: (v) => v.assignTimeStamp,
 			sortable: true,
 			headerClass: 'text-right'
 		},
 		{
-			key: 'askAmount',
-			title: 'ASK AMOUNT',
-			value: (v) => v.orderAmount,
+			key: 'limitPrice',
+			title: 'LIMIT PRICE',
+			value: (v) => v.limitPrice,
 			sortable: true,
 			headerClass: 'text-right'
 		},
 		{
-			key: 'actualReward',
-			title: 'ACTUAL REWARD',
-			value: (v) => v.value,
+			key: 'matchedPrice',
+			title: 'MATCHED PRICE',
+			value: (v) => v.matchedPrice,
 			sortable: true,
 			headerClass: 'text-right'
 		},
 		{
-			key: 'provingTime',
-			title: 'REQUESTED PROVING TIME',
-			value: (v) => v.value,
+			key: 'expiryTime',
+			title: 'EXPIRY TIME',
+			value: (v) => v.expiryTime,
 			sortable: true,
 			headerClass: 'text-right'
 		}
@@ -65,21 +65,23 @@
 	{#if tableRows.length > 0}
 		{#each tableRows as tableRow (tableRow.txId)}
 			<tr>
-				<td class="border-[#202740b3] bg-inherit text-left">{tableRow.assignTimeStamp}</td>
-				<td class="border-[#202740b3] bg-inherit text-center">{tableRow.orderStatus}</td>
-				<td class="border-[#202740b3] bg-inherit text-center">
-					<div
-						class="badge text-white {tableRow.orderType === 'BUY'
+				<td class="border-[#202740b3] bg-inherit">{tableRow.date}</td>
+				<td class="border-[#202740b3] bg-inherit text-center"
+					><div
+						class="badge text-white {tableRow.orderStatus === 'COMPLETE'
 							? 'badge-success'
 							: 'badge-error'}"
 					>
-						{tableRow.orderType}
-					</div>
+						{tableRow.orderStatus}
+					</div></td
+				>
+				<td class="border-[#202740b3] bg-inherit text-center">
+					{tableRow.assignedTo}
 				</td>
-				<td class="border-[#202740b3] bg-inherit text-right">{tableRow.orderSize}</td>
-				<td class="border-[#202740b3] bg-inherit text-right">{tableRow.askAmount}</td>
-				<td class="border-[#202740b3] bg-inherit text-right">{tableRow.proofGenerationCost}</td>
-				<td class="border-[#202740b3] bg-inherit text-right">{tableRow.askProvingTime}</td>
+				<td class="border-[#202740b3] bg-inherit text-right">{tableRow.assignTimeStamp}</td>
+				<td class="border-[#202740b3] bg-inherit text-right">{tableRow.limitPrice}</td>
+				<td class="border-[#202740b3] bg-inherit text-right">{tableRow.matchedPrice}</td>
+				<td class="border-[#202740b3] bg-inherit text-right">{tableRow.expiryTime}</td>
 			</tr>
 		{/each}
 	{:else}
