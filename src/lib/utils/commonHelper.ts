@@ -27,3 +27,17 @@ export function getHumanReadableTime(secondsToConvert: number) {
 
 	return timeString.trim();
 }
+
+export function getOrderStatusTagColor(status: string) {
+	if (status === 'COMPLETE') {
+		return 'badge-success';
+	} else if (status === 'ASSIGNED') {
+		return 'badge-warning';
+	} else if (status === 'CREATE') {
+		return 'badge-info';
+	} else if (status === 'EXPIRED') {
+		return 'badge-error';
+	} else {
+		return 'badge-primary';
+	}
+}

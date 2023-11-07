@@ -1,14 +1,12 @@
 <script lang="ts">
 	import { getMarketDataFromSubgraph } from '$lib/controller/subgraphController';
 	import { marketDataStore, selectedMarket } from '$lib/stores/general-data';
-	import { capitaliseFirstLetters, getFirstTwoLetters } from '$lib/utils/stringHelpers';
+	import { capitaliseFirstLetters, getFirstTwoLetters } from '$lib/utils/commonHelper';
 	import { onMount } from 'svelte';
 
 	onMount(() => {
 		getMarketDataModified();
 	});
-
-	let marketList = [];
 
 	async function getMarketDataModified() {
 		const currentUnixTimeStamp = Math.floor(Date.now() / 1000);
@@ -47,7 +45,6 @@
 				metadata: modifiedMetadata
 			};
 		});
-		console.log('after decode', marketDataModified);
 
 		marketDataStore.set({
 			loading: false,

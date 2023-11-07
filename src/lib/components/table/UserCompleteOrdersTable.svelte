@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { getOrderStatusTagColor } from '$lib/utils/commonHelper';
 	import SortableTable from './SortableTable.svelte';
 	import type { ITableColumns } from './types';
 
@@ -68,11 +69,7 @@
 			<tr>
 				<td class="border-[#202740b3] bg-inherit">{tableRow.date}</td>
 				<td class="border-[#202740b3] bg-inherit text-center"
-					><div
-						class="badge text-white {tableRow.orderStatus === 'COMPLETE'
-							? 'badge-success'
-							: 'badge-error'}"
-					>
+					><div class="badge text-white {getOrderStatusTagColor(tableRow.orderStatus)}">
 						{tableRow.orderStatus}
 					</div></td
 				>

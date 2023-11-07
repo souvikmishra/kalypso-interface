@@ -1,9 +1,8 @@
 <script lang="ts">
 	import { getOrderBookDataFromSubgraph } from '$lib/controller/subgraphController';
 	import { selectedMarket } from '$lib/stores/general-data';
-	import { get } from 'svelte/store';
 	import OrderBookTable from './OrderBookTable.svelte';
-	import { getHumanReadableTime } from '$lib/utils/stringHelpers';
+	import { getHumanReadableTime } from '$lib/utils/commonHelper';
 
 	let tableDataLoading = true;
 	let orderBookData: any[] = [];

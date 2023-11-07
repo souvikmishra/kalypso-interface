@@ -59,7 +59,7 @@ export async function getAsksOfMarketForUserFromSubgraph(userAddress: string, ma
 	const url = SUBGRAPH_API_ENDPOINT;
 	const query = ALL_ASKS_OF_MARKET_FOR_USER_QUERY;
 	const response = await subgraphQueryWrapper(url, query, {
-		userAddress: '0x8ad7770b250a20f71e61da20800775cca3c86a1c',
+		userAddress,
 		marketId
 	});
 	return response;
