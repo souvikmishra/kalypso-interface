@@ -2,9 +2,7 @@
 	import { selectedMarket } from '$lib/stores/general-data';
 	import PaddingBorder from '../common/PaddingBorder.svelte';
 	import HeaderPriceCell from './HeaderPriceCell.svelte';
-	import {
-		getPendingOrAssignedAsksForMarketFromSubgraph
-	} from '$lib/controller/subgraphController';
+	import { getPendingOrAssignedAsksForMarketFromSubgraph } from '$lib/controller/subgraphController';
 
 	let pendingAsks: any;
 	let assignedAsks: any;
@@ -14,9 +12,7 @@
 		const receivedAssigned = asksReceived.data.askRequests.filter(
 			(ask) => ask.state === 'ASSIGNED'
 		);
-		const receivedPending = asksReceived.data.askRequests.filter(
-			(ask) => ask.state === 'CREATE'
-		);
+		const receivedPending = asksReceived.data.askRequests.filter((ask) => ask.state === 'CREATE');
 		assignedAsks = receivedAssigned.length;
 		pendingAsks = receivedPending.length;
 	}
@@ -27,8 +23,8 @@
 	}
 </script>
 
-<div class="ml-5 flex flex-row items-center gap-6">
-	<div class="text-xl font-semibold text-base-content 2xl:text-2xl">
+<div class="ml-3 flex flex-row items-center gap-3 2xl:ml-5 2xl:gap-6">
+	<div class="text-lg font-semibold text-base-content 2xl:text-2xl">
 		{`$${parseInt($selectedMarket.total_value).toLocaleString('en-US', {
 			minimumFractionDigits: 2
 		})}`}
@@ -43,13 +39,7 @@
 	<PaddingBorder />
 	<HeaderPriceCell data={`${$selectedMarket.total_proofs}`} label={'Completed Proofs'} />
 	<PaddingBorder />
-	<HeaderPriceCell
-		data={`${pendingAsks}`}
-		label={'Pending Orders'}
-	/>
+	<HeaderPriceCell data={`${pendingAsks}`} label={'Pending Orders'} />
 	<PaddingBorder />
-	<HeaderPriceCell
-		data={`${assignedAsks}`}
-		label={'Assigned Orders'}
-	/>
+	<HeaderPriceCell data={`${assignedAsks}`} label={'Assigned Orders'} />
 </div>
