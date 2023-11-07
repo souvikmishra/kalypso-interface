@@ -1,7 +1,9 @@
 import {
 	COMPLETED_ASKS_FOR_MARKET_QUERY,
 	MARKET_DATA_QUERY,
-	NOT_COMPLETED_ASKS_FOR_MARKET_QUERY
+	NOT_COMPLETED_ASKS_FOR_MARKET_QUERY,
+	PENDING_ASKS_FOR_MARKET_QUERY,
+	ASSIGNED_ASKS_FOR_MARKET_QUERY
 } from '$lib/constants/subgraphQueries';
 import { SUBGRAPH_API_ENDPOINT } from '$lib/constants/common';
 
@@ -41,6 +43,20 @@ export async function getNotCompletedAsksForMarketFromSubgraph(marketId: string)
 export async function getCompletedAsksForMarketFromSubgraph(marketId: string) {
 	const url = SUBGRAPH_API_ENDPOINT;
 	const query = COMPLETED_ASKS_FOR_MARKET_QUERY;
+	const response = await subgraphQueryWrapper(url, query, { marketId });
+	return response;
+}
+
+export async function getPendingAsksForMarketFromSubgraph(marketId: string) {
+	const url = SUBGRAPH_API_ENDPOINT;
+	const query = PENDING_ASKS_FOR_MARKET_QUERY;
+	const response = await subgraphQueryWrapper(url, query, { marketId });
+	return response;
+}
+
+export async function getAssignedAsksForMarketFromSubgraph(marketId: string) {
+	const url = SUBGRAPH_API_ENDPOINT;
+	const query = PENDING_ASKS_FOR_MARKET_QUERY;
 	const response = await subgraphQueryWrapper(url, query, { marketId });
 	return response;
 }

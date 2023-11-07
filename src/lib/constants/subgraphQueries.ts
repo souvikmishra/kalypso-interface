@@ -67,3 +67,51 @@ export const COMPLETED_ASKS_FOR_MARKET_QUERY = `query CompletedMarketAsksQuery($
     }
   }
 }`;
+
+export const PENDING_ASKS_FOR_MARKET_QUERY = `query CompletedMarketAsksQuery($marketId: String)  {
+  askRequests (where: {market: $marketId, state_in: [CREATE] }) {
+    prover
+    id
+    state
+    prover_data
+    secret_data
+    market {
+      id
+      market_id
+    }
+    proving_time
+    reward
+    task {
+      generator
+      assigned_at_ts
+      completed_at_ts
+      generator_info {
+        proof_generation_cost
+      }
+    }
+  }
+}`;
+
+export const ASSIGNED_ASKS_FOR_MARKET_QUERY = `query CompletedMarketAsksQuery($marketId: String)  {
+  askRequests (where: {market: $marketId, state_in: [ASSIGNED] }) {
+    prover
+    id
+    state
+    prover_data
+    secret_data
+    market {
+      id
+      market_id
+    }
+    proving_time
+    reward
+    task {
+      generator
+      assigned_at_ts
+      completed_at_ts
+      generator_info {
+        proof_generation_cost
+      }
+    }
+  }
+}`;
