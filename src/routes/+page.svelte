@@ -7,6 +7,8 @@
 	import ZkMarketList from '$lib/components/zkmarket/ZkMarketList.svelte';
 </script>
 
+<svelte:head><title>Kalypso</title></svelte:head>
+
 <div class="flex gap-5 2xl:gap-6">
 	<div class="flex w-full min-w-[285px] max-w-[376px] flex-col gap-5 2xl:gap-6">
 		<ZkMarketList />
