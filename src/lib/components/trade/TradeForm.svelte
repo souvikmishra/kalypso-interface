@@ -25,8 +25,8 @@
 			value: 'ask'
 		},
 		{
-			label: 'Sell',
-			value: 'sell'
+			label: 'Prove',
+			value: 'prove'
 		}
 	];
 	let orderType = 'ask';
