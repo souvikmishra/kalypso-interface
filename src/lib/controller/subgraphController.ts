@@ -3,7 +3,8 @@ import {
 	COMPLETED_ASKS_FOR_MARKET_QUERY,
 	MARKET_DATA_QUERY,
 	NOT_COMPLETED_ASKS_FOR_MARKET_QUERY,
-	PENDING_OR_ASSIGNED_ASKS_FOR_MARKET_QUERY
+	PENDING_OR_ASSIGNED_ASKS_FOR_MARKET_QUERY,
+	ORDER_BOOK_DATA_QUERY
 } from '$lib/constants/subgraphQueries';
 import { SUBGRAPH_API_ENDPOINT } from '$lib/constants/common';
 
@@ -57,6 +58,16 @@ export async function getPendingOrAssignedAsksForMarketFromSubgraph(marketId: st
 export async function getAsksOfMarketForUserFromSubgraph(userAddress: string, marketId: string) {
 	const url = SUBGRAPH_API_ENDPOINT;
 	const query = ALL_ASKS_OF_MARKET_FOR_USER_QUERY;
-	const response = await subgraphQueryWrapper(url, query, { userAddress, marketId });
+	const response = await subgraphQueryWrapper(url, query, {
+		userAddress: '0x8ad7770b250a20f71e61da20800775cca3c86a1c',
+		marketId
+	});
+	return response;
+}
+
+export async function getOrderBookDataFromSubgraph(marketId: string) {
+	const url = SUBGRAPH_API_ENDPOINT;
+	const query = ORDER_BOOK_DATA_QUERY;
+	const response = await subgraphQueryWrapper(url, query, { marketId });
 	return response;
 }

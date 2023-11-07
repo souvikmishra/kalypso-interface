@@ -116,3 +116,19 @@ export const ALL_ASKS_OF_MARKET_FOR_USER_QUERY = `query AllAsksForUserQuery($use
     }
   }
 }`;
+
+export const ORDER_BOOK_DATA_QUERY = `query OrderBookDataQuery($marketId: String) {
+  askRequests (orderBy: task__completed_at_ts, orderDirection: desc, where: {market: $marketId, state_in: [COMPLETE] }) {
+    id
+    task {
+      assigned_at_ts
+      completed_at_ts
+      generator_info {
+        generator {
+          id
+        }
+        proof_generation_cost
+      }
+    }
+  }
+}`;

@@ -1,56 +1,47 @@
 <script lang="ts">
-	import DepthVisualizer from './DepthVisualizer.svelte';
-	import Loader from './Loader.svelte';
-	import PriceLevelRow from './PriceLevelRow.svelte';
-	import { OrderType } from './types';
-	import { createDummyState, formatNumber } from './utils';
-	import dummyBidsData from './bids';
-	import { onMount } from 'svelte';
+	import { getOrderBookDataFromSubgraph } from '$lib/controller/subgraphController';
+	import { selectedMarket } from '$lib/stores/general-data';
+	import { get } from 'svelte/store';
+	import OrderBookTable from './OrderBookTable.svelte';
+	import { getHumanReadableTime } from '$lib/utils/stringHelpers';
 
-	let bids: string[][] = [];
-	let asks: string[][] = [];
-	let bidsPriceLevels: any[];
-	let asksPriceLevels: any[];
+	let tableDataLoading = true;
+	let orderBookData: any[] = [];
 
-	onMount(async () => {
-		const data = createDummyState({
-			bids: dummyBidsData.bids,
-			asks: dummyBidsData.asks,
-			groupingSize: 0.5
-		});
-		bids = data.bids;
-		asks = data.asks;
-	});
+	async function getOrderBookDataModified(marketId: string) {
+		tableDataLoading = true;
+		const orderBookDataFromSubgraph = await getOrderBookDataFromSubgraph(marketId);
 
-	const formatPrice = (arg: number): string => {
-		return arg.toLocaleString('en', { useGrouping: true, minimumFractionDigits: 2 });
-	};
-	const buildPriceLevels = (levels: string[][], orderType: OrderType) => {
-		let sortedPriceLevels = [...levels].sort(
-			(currentLevel: string[], nextLevel: string[]): number => {
-				let result: number = 0;
-				if (orderType === OrderType.ASKS) {
-					result = Number(nextLevel[0]) - Number(currentLevel[0]);
-				} else {
-					result = Number(currentLevel[0]) - Number(nextLevel[0]);
-				}
-				return result;
-			}
-		);
-
-		sortedPriceLevels.length = 9;
-
-		return sortedPriceLevels.map((level, idx) => {
+		orderBookData = orderBookDataFromSubgraph.data.askRequests.map((ask) => {
+			const txId = ask.id;
+			const date = new Date(ask.task.completed_at_ts * 1000).toLocaleTimeString('en-US', {
+				hour12: false
+			});
+			const matchedPrice = (
+				parseInt(ask.task.generator_info.proof_generation_cost) / 100000000
+			).toLocaleString('en-US', {
+				minimumFractionDigits: 2,
+				maximumFractionDigits: 8
+			});
+			const proofTime = getHumanReadableTime(ask.task.completed_at_ts - ask.task.assigned_at_ts);
+			const generator =
+				ask.task.generator_info.generator.id.slice(0, 3) +
+				'...' +
+				ask.task.generator_info.generator.id.slice(-4);
 			return {
-				total: formatNumber(Number(level[2])),
-				depth: level[3],
-				size: formatNumber(Number(level[1])),
-				price: formatPrice(Number(level[0]))
+				txId,
+				date,
+				matchedPrice,
+				proofTime,
+				generator
 			};
 		});
-	};
-	$: bidsPriceLevels = buildPriceLevels(bids, OrderType.BIDS);
-	$: asksPriceLevels = buildPriceLevels(asks, OrderType.ASKS);
+		tableDataLoading = false;
+	}
+
+	$: if ($selectedMarket.id !== undefined && $selectedMarket.id !== '') {
+		getOrderBookDataModified($selectedMarket.id);
+	}
 </script>
 
 <div class="flex h-full flex-col rounded-[20px] bg-base-100 p-6">
@@ -58,29 +49,5 @@
 		<p class="font-poppins text-base font-medium leading-4 text-base-content">Market Trades</p>
 		<div class="divider mt-0"></div>
 	</div>
-	<div class="mb-3 flex flex-row justify-between">
-		<span class="text-sm font-normal capitalize text-[#9699BC]">Bid</span>
-		<span class="text-sm font-normal capitalize text-[#9699BC]">Cost</span>
-		<span class="text-sm font-normal capitalize text-[#9699BC]">Generation Time</span>
-	</div>
-	{#if bids.length && asks.length}
-		<div class="asks">
-			{#each asksPriceLevels as curAsk}
-				<div class="">
-					<DepthVisualizer type={OrderType.ASKS} depth={curAsk.depth} />
-					<PriceLevelRow rowData={curAsk} type={OrderType.ASKS} />
-				</div>
-			{/each}
-		</div>
-		<div class="bids">
-			{#each bidsPriceLevels as curBid}
-				<div class="">
-					<DepthVisualizer type={OrderType.BIDS} depth={curBid.depth} />
-					<PriceLevelRow rowData={curBid} type={OrderType.BIDS} />
-				</div>
-			{/each}
-		</div>
-	{:else}
-		<Loader />
-	{/if}
+	<OrderBookTable tableRows={orderBookData} {tableDataLoading} />
 </div>
