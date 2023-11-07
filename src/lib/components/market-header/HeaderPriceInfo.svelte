@@ -17,7 +17,6 @@
 		pendingAsks = receivedPending.length;
 	}
 
-	$: priceByTime = $selectedMarket.avg_cost / ($selectedMarket.avg_time / 60);
 	$: if ($selectedMarket.id !== '' && $selectedMarket.id !== undefined) {
 		getPendingOrAssignedAsks($selectedMarket.id);
 	}
@@ -31,10 +30,10 @@
 	</div>
 	<PaddingBorder />
 	<HeaderPriceCell
-		data={`$${parseInt($selectedMarket.avg_cost).toLocaleString('en-US', {
+		data={`${parseInt($selectedMarket.avg_cost).toLocaleString('en-US', {
 			minimumFractionDigits: 2
 		})}`}
-		label={'Avg. Cost'}
+		label={'Avg. Cost (USDC)'}
 	/>
 	<PaddingBorder />
 	<HeaderPriceCell data={`${$selectedMarket.total_proofs}`} label={'Completed Proofs'} />
