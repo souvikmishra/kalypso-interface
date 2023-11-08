@@ -172,18 +172,15 @@
 			const volumeData = [];
 			const priceData = [];
 			for (let timeKey = minTimeKey; timeKey <= maxTimeKey; timeKey += timeframeInSeconds) {
-				const date = new Date((currentTimestamp - timeKey) * 1000);
-				const year = date.getFullYear();
-				const month = (date.getMonth() + 1).toString().padStart(2, '0');
-				const day = date.getDate().toString().padStart(2, '0');
-				const formattedDate = `${year}-${month}-${day}`;
+				const date = currentTimestamp - timeKey;
+
 				volumeData.unshift({
-					time: formattedDate,
+					time: date,
 					value: groupedData[timeKey]?.count || 0,
 					color: '#57CA9499'
 				});
 				priceData.unshift({
-					time: formattedDate,
+					time: date,
 					open: groupedData[timeKey]?.open || 0,
 					close: groupedData[timeKey]?.close || 0,
 					high: groupedData[timeKey]?.high || 0,
@@ -191,7 +188,6 @@
 					color: groupedData[timeKey]?.open > groupedData[timeKey]?.close ? '#FF3569' : '#57CA94'
 				});
 			}
-
 			volume = volumeData;
 			price = priceData;
 		}
@@ -264,29 +260,31 @@
 		</div>
 	</div>
 
-	<Chart {...options} ref={handleChartRef}>
-		{#if indicatorType == 'candlestick'}
-			{#key price}
-				<CandleStickSeries {...candlestickOptions} />
-			{/key}
-		{:else if indicatorType == 'hollowstick'}
-			{#key price}
-				<CandleStickSeries {...hollowstickOptions} />
-			{/key}
-		{:else}
-			{#key lineData}
-				<LineSeries data={lineData} />
-			{/key}
-		{/if}
+	{#key timeFrame}
+		<Chart {...options} ref={handleChartRef}>
+			{#if indicatorType == 'candlestick'}
+				{#key price}
+					<CandleStickSeries {...candlestickOptions} />
+				{/key}
+			{:else if indicatorType == 'hollowstick'}
+				{#key price}
+					<CandleStickSeries {...hollowstickOptions} />
+				{/key}
+			{:else}
+				{#key lineData}
+					<LineSeries data={lineData} />
+				{/key}
+			{/if}
 
-		{#key volume}
-			<HistogramSeries
-				data={volume}
-				priceScaleId="volume"
-				color="#26a69a"
-				priceFormat={{ type: 'volume' }}
-			/>
-			<PriceScale id="volume" mode={0} scaleMargins={{ top: 0.8, bottom: 0 }} />
-		{/key}
-	</Chart>
+			{#key volume}
+				<HistogramSeries
+					data={volume}
+					priceScaleId="volume"
+					color="#26a69a"
+					priceFormat={{ type: 'volume' }}
+				/>
+				<PriceScale id="volume" mode={0} scaleMargins={{ top: 0.8, bottom: 0 }} />
+			{/key}
+		</Chart>
+	{/key}
 </div>
