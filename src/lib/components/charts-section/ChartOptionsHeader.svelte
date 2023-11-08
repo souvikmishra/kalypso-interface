@@ -24,7 +24,7 @@
 		}
 	];
 	export let timeFrame = '1d';
-	export let indicatorType = 'candlestick';
+	export let indicatorType = 'line';
 </script>
 
 <div class="flex w-full items-center">
