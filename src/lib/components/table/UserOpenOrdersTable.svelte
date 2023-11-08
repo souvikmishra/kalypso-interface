@@ -36,14 +36,14 @@
 		},
 		{
 			key: 'limitPrice',
-			title: 'LIMIT PRICE',
+			title: 'LIMIT PRICE (USDC)',
 			value: (v) => v.limitPrice,
 			sortable: true,
 			headerClass: 'text-right'
 		},
 		{
 			key: 'matchedPrice',
-			title: 'MATCHED PRICE',
+			title: 'MATCHED PRICE (USDC)',
 			value: (v) => v.matchedPrice,
 			sortable: true,
 			headerClass: 'text-right'
