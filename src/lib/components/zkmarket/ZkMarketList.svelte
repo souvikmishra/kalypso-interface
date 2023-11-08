@@ -50,7 +50,7 @@
 			loading: false,
 			data: marketDataModified
 		});
-		selectedMarket.set(marketDataModified[0]);
+		selectedMarket.set(marketDataModified[2]);
 	}
 
 	const nameBadgeColors = ['#2DB8E3', '#FCC35B', '#1EA7FF', '#E46C8A', '#5967FF'];
