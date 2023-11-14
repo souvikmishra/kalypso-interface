@@ -15,6 +15,7 @@
 		selectedMarket
 	} from '$lib/stores/general-data';
 	import { getCompletedAsksForMarketFromSubgraph } from '$lib/controller/subgraphController';
+	import { onDestroy, onMount } from 'svelte';
 
 	let indicatorType: string;
 	let timeFrame: string;
@@ -22,6 +23,14 @@
 	let volume: any = [];
 	let price: any = [];
 	let dataLoading = true;
+	let chartElementDimensions: DOMRect;
+
+	onMount(() => {
+		document.addEventListener('fullscreenchange', handleFullscreenChange);
+	});
+	onDestroy(() => {
+		document.removeEventListener('fullscreenchange', handleFullscreenChange);
+	});
 
 	const options: ChartProps = {
 		width: 600,
@@ -107,7 +116,28 @@
 		downloadChartAnchorEleRef.href = chartImage;
 		downloadChartAnchorEleRef.download = `ChartImage_${new Date().toLocaleString()}.png`;
 	}
-	function handleFullscreenClick() {}
+
+	function handleFullscreenClick() {
+		const chartElement = document.getElementById('chart');
+		if (chartElement && !document.fullscreenElement) {
+			chartElementDimensions = chartElement.getBoundingClientRect();
+			chartElement.requestFullscreen();
+		}
+	}
+
+	function handleFullscreenChange() {
+		if (!document.fullscreenElement && chartElementDimensions) {
+			exitFullscreen();
+		}
+	}
+
+	function exitFullscreen() {
+		const chartElement = document.getElementById('chart');
+		if (chartElement) {
+			chartElement.style.height = chartElementDimensions['height'] + 'px';
+			chartElement.style.width = chartElementDimensions['width'] + 'px';
+		}
+	}
 
 	async function getCompletedAsksForMarketModified(marketId: string) {
 		completedAsks = await getCompletedAsksForMarketFromSubgraph(marketId);
